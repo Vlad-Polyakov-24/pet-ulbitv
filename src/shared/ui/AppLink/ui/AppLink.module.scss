@@ -1,0 +1,20 @@
+.app-link {
+	display: flex;
+	align-items: center;
+	width: max-content;
+	max-width: 100%;
+	gap: 5px;
+	color: var(--primary-color);
+
+	&.primary {
+		color: var(--primary-color);
+	}
+	&.secondary {
+		color: var(--inverted-primary-color);
+	}
+	&.red {
+		color: red;
+	}
+}
+
+

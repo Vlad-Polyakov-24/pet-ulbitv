@@ -1,0 +1,11 @@
+.nav {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	padding-left: 20px;
+	padding-right: 20px;
+
+	&__text {
+		white-space: nowrap;
+	}
+}
