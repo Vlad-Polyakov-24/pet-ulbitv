@@ -9,7 +9,7 @@ type StoreProviderProps = {
 };
 
 const StoreProvider = ({ children, initialState }: StoreProviderProps) => {
-	const store = createReduxStore(initialState );
+	const store = createReduxStore(initialState);
 
 	return <Provider store={store}>{children}</Provider>;
 };

@@ -1,3 +1,4 @@
 export enum localStorageKeys {
 	APP_THEME = 'app_theme',
+	AUTH_DATA = 'auth_data',
 }

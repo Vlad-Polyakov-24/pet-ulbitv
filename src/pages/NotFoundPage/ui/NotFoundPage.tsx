@@ -8,7 +8,7 @@ interface NotFoundPageProps {
 }
 
 const NotFoundPage = ({ className }: NotFoundPageProps) => {
-	const { t } = useTranslation();
+	const { t } = useTranslation('errors');
 
 	return (
 		<section className={classNames(cls.notFound, {}, [className])}>

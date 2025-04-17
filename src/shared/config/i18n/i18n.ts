@@ -11,14 +11,14 @@ void i18n
 	.init({
 		fallbackLng: locales.EN,
 		debug: false,
-
 		interpolation: {
 			escapeValue: false,
 		},
-
 		backend: {
 			loadPath: '/locales/{{lng}}/{{ns}}.json',
 		},
+		ns: ['translation', 'navigation', 'fields', 'errors', 'auth', 'main', 'about' ],
+		defaultNS: 'translation',
 	});
 
 export default i18n;

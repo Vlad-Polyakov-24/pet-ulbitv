@@ -11,7 +11,7 @@ type NavProps = {
 };
 
 const Nav = ({ className, collapsed }: NavProps) => {
-	const { t } = useTranslation();
+	const { t } = useTranslation('navigation');
 
 	return (
 		<nav className={classNames(cls.nav, {}, [className])}>

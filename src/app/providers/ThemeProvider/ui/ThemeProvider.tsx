@@ -2,7 +2,7 @@ import { useMemo, useState, type ReactNode } from 'react';
 import { useLocalStorage } from '@shared/hooks/useLocalStorage';
 import { ThemeContext } from '../model/store/ThemeContext';
 import { Theme } from '../model/types/ThemeProvider.types';
-import { localStorageKeys } from '@shared/config/localStorage/localStorage';
+import { localStorageKeys } from '@shared/const/localStorage';
 
 interface ThemeProviderProps {
 	initialTheme?: Theme;

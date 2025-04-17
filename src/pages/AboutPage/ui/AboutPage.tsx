@@ -8,7 +8,7 @@ const AboutPage = () => {
 	return (
 		<section className={cls.about}>
 			<Container fluid>
-				{t('about us')}
+				{t('title')}
 			</Container>
 		</section>
 	);

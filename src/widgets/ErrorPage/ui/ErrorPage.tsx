@@ -8,7 +8,7 @@ interface ErrorPageProps {
 }
 
 const ErrorPage = ({ className }: ErrorPageProps) => {
-	const { t } = useTranslation();
+	const { t } = useTranslation('errors');
 
 	const reloadPage = () => {
 		location.reload();

@@ -3,12 +3,12 @@ import { Container } from '@shared/ui/Container';
 import cls from './MainPage.module.scss';
 
 const MainPage = () => {
-	const { t } = useTranslation();
+	const { t } = useTranslation('main');
 
 	return (
 		<section className={cls.main}>
 			<Container fluid>
-				{t('main page')}
+				{t('title')}
 			</Container>
 		</section>
 	);

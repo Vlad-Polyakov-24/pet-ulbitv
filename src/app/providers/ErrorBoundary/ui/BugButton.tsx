@@ -4,7 +4,7 @@ import { Button } from '@shared/ui/Button';
 
 const BugButton = () => {
     const [error, setError] = useState(false);
-    const { t } = useTranslation();
+    const { t } = useTranslation('errors');
 
     const onThrow = () => setError(true);
 
