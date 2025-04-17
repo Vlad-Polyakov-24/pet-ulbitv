@@ -1,8 +1,7 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import i18n from '@shared/config/i18n/i18n';
 import { setStorage } from '@shared/lib/localStorage';
-import { type IUser, userActions } from '@entities/User';
+import { userActions, type IUser } from '@entities/User';
 import { endpoints } from '@shared/const/endpoints';
 import { localStorageKeys } from '@shared/const/localStorage';
 import type { ILoginSchema } from '../types/LoginSchema.types';
@@ -25,7 +24,7 @@ export const loginByUsername = createAsyncThunk<IUser, ILoginByUsernameProps>(
 			return response.data;
 		} catch (e) {
 			console.error(e);
-			return thunkAPI.rejectWithValue(i18n.t('invalid credentials', { ns: 'errors' }));
+			return thunkAPI.rejectWithValue('invalid credentials');
 		}
  	},
 );

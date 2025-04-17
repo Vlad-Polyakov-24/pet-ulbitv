@@ -22,6 +22,7 @@ type LoginFormProps = {
 const LoginForm = ({ className, closeModal }: LoginFormProps) => {
 	const { t: tAuth } = useTranslation('auth');
 	const { t: tFields } = useTranslation('fields');
+	const { t: tErrors } = useTranslation('errors');
 	const dispatch = useAppDispatch();
 	const loginForm = useSelector(getLoginState);
 	const { username, password, error, isLoading } = loginForm;
@@ -68,7 +69,7 @@ const LoginForm = ({ className, closeModal }: LoginFormProps) => {
 					onChange={(value) => handleChange(name, value)}
 				/>
 			))}
-			<Text text={error} color={TextColor.RED_LIGHT}/>
+			{error && <Text text={tErrors(error)} color={TextColor.RED_LIGHT} />}
 			<Button
 				theme={ButtonTheme.OUTLINE}
 				className={'ml-a'}
