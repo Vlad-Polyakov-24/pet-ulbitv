@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vitest/config';
 import { resolve } from 'path';
 import react from '@vitejs/plugin-react-swc'
 import svgr from 'vite-plugin-svgr';
@@ -27,5 +27,10 @@ export default defineConfig({
       '@entities': resolve(__dirname, './src/entities'),
       '@shared': resolve(__dirname, './src/shared'),
     },
+  },
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: './src/shared/config/test/config.ts',
   },
 });

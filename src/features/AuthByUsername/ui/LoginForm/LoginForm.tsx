@@ -5,7 +5,7 @@ import { useAppDispatch } from '@app/providers/StoreProvider';
 import { classNames } from '@shared/lib/classNames';
 import { DynamicModuleLoader, type ReducersList } from '@shared/lib/components/DynamicModuleLoader';
 import { getLoginState } from '../../model/selectors/getLoginState/getLoginState';
-import { loginByUsername } from '../../model/services/loginByUsername';
+import { loginByUsername } from '../../model/services/loginByUsername/loginByUsername.ts';
 import { Input } from '@shared/ui/Input';
 import { Button, ButtonTheme } from '@shared/ui/Button';
 import { Text, TextColor } from '@shared/ui/Text';

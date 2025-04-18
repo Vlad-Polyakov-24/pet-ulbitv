@@ -2,9 +2,9 @@ import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { setStorage } from '@shared/lib/localStorage';
 import { userActions, type IUser } from '@entities/User';
-import { endpoints } from '@shared/const/endpoints';
+import { endpoints } from '@shared/const/endpoints.ts';
 import { localStorageKeys } from '@shared/const/localStorage';
-import type { ILoginSchema } from '../types/LoginSchema.types';
+import type { ILoginSchema } from '../../types/LoginSchema.types';
 
 type ILoginByUsernameProps = Omit<ILoginSchema, 'error' | 'isLoading'>;
 
