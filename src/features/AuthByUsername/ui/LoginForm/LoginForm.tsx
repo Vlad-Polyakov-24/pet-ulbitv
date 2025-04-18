@@ -3,13 +3,14 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch } from '@app/providers/StoreProvider';
 import { classNames } from '@shared/lib/classNames';
+import { DynamicModuleLoader, type ReducersList } from '@shared/lib/components/DynamicModuleLoader';
 import { getLoginState } from '../../model/selectors/getLoginState/getLoginState';
 import { loginByUsername } from '../../model/services/loginByUsername';
 import { Input } from '@shared/ui/Input';
 import { Button, ButtonTheme } from '@shared/ui/Button';
 import { Text, TextColor } from '@shared/ui/Text';
 import { Loader, LoaderTheme } from '@shared/ui/Loader';
-import { loginActions } from '../../model/slice/loginSlice';
+import { loginActions, loginReducer } from '../../model/slice/loginSlice';
 import { getLoginInputs } from '../../model/data/form.data';
 import { ILoginInputs } from '../../model/types/LoginForm.types';
 import cls from './LoginForm.module.scss';
@@ -19,7 +20,11 @@ type LoginFormProps = {
 	closeModal?: () => void;
 };
 
-const LoginForm = ({ className, closeModal }: LoginFormProps) => {
+const initialReducer: ReducersList = {
+	login: loginReducer,
+};
+
+const LoginForm = ({ className, closeModal }: LoginFormProps) =>  {
 	const { t: tAuth } = useTranslation('auth');
 	const { t: tFields } = useTranslation('fields');
 	const { t: tErrors } = useTranslation('errors');
@@ -54,32 +59,34 @@ const LoginForm = ({ className, closeModal }: LoginFormProps) => {
 	);
 
 	return (
-		<form
-			className={classNames(cls.form, {}, [className])}
-			onSubmit={(e) => handleSubmit(e)}
-		>
-			<Text title={tAuth('authorization form')}/>
-			{inputs.map(({ name, placeholder, label }) => (
-				<Input
-					key={name}
-					name={name}
-					label={label}
-					placeholder={placeholder}
-					value={loginForm[name]}
-					onChange={(value) => handleChange(name, value)}
-				/>
-			))}
-			{error && <Text text={tErrors(error)} color={TextColor.RED_LIGHT} />}
-			<Button
-				theme={ButtonTheme.OUTLINE}
-				className={'ml-a'}
-				type={'submit'}
-				disabled={isLoading}
+		<DynamicModuleLoader reducers={initialReducer}>
+			<form
+				className={classNames(cls.form, {}, [className])}
+				onSubmit={(e) => handleSubmit(e)}
 			>
-				{tAuth('login')}
-			</Button>
-			{isLoading && <Loader theme={LoaderTheme.OVERLAY} />}
-		</form>
+				<Text title={tAuth('authorization form')}/>
+				{inputs.map(({ name, placeholder, label }) => (
+					<Input
+						key={name}
+						name={name}
+						label={label}
+						placeholder={placeholder}
+						value={loginForm[name]}
+						onChange={(value) => handleChange(name, value)}
+					/>
+				))}
+				{error && <Text text={tErrors(error)} color={TextColor.RED_LIGHT} />}
+				<Button
+					theme={ButtonTheme.OUTLINE}
+					className={'ml-a'}
+					type={'submit'}
+					disabled={isLoading}
+				>
+					{tAuth('login')}
+				</Button>
+				{isLoading && <Loader theme={LoaderTheme.OVERLAY} />}
+			</form>
+		</DynamicModuleLoader>
 	);
 };
 

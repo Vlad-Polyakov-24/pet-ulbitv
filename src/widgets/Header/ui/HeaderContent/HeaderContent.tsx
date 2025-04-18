@@ -34,7 +34,7 @@ const HeaderContent = ({ isAuth = false }: HeaderContentProps) => {
 			<Button theme={ButtonTheme.CLEAR_INVERTED} className={'ml-a'} onClick={open}>
 				{t('login')}
 			</Button>
-			<LoginModal isOpen={isOpen} onClose={close} />
+			{isOpen && <LoginModal isOpen={isOpen} onClose={close} />}
 		</>
 	);
 };
