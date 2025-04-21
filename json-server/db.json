@@ -25,5 +25,14 @@
       "password": "123"
     }
   ],
-  "profile": { "name": "typicode" }
+  "profile": {
+    "firstname": "Vlad",
+    "lastname": "Poliakov",
+    "age": "29",
+    "currency": "uah",
+    "country": "Ukraine",
+    "city": "Kharkiv",
+    "username": "admin",
+    "avatar": ""
+  }
 }

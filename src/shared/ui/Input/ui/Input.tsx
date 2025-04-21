@@ -1,4 +1,4 @@
-import type { ChangeEvent, InputHTMLAttributes } from 'react';
+import { memo, type ChangeEvent, type InputHTMLAttributes } from 'react';
 import { classNames } from '@shared/lib/classNames';
 import cls from './Input.module.scss';
 
@@ -8,7 +8,7 @@ interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChan
 	onChange?: (value: string) => void;
 }
 
-const Input = (props: InputProps) => {
+const Input = memo((props: InputProps) => {
 	const { className, label, onChange, type = 'text', ...rest } = props;
 
 	const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -26,6 +26,6 @@ const Input = (props: InputProps) => {
 			/>
 		</label>
 	);
-};
+});
 
 export default Input;

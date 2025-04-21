@@ -1,4 +1,4 @@
-import type { CSSProperties } from 'react';
+import { memo, type CSSProperties } from 'react';
 import { classNames, type Additional } from '@shared/lib/classNames';
 import { getColorClass, TextColorProps } from '../lib/getColorClass';
 import { getSizeClass, TextSizeProps } from '../lib/getSizeClass';
@@ -13,7 +13,7 @@ type TextProps = {
 	size?: TextSizeProps;
 };
 
-const Text = (props: TextProps) => {
+const Text = memo((props: TextProps) => {
 	const { className, styles, title, text, color, size } = props;
 	const titleAdditional: Additional = [
 		cls[getColorClass('title', color)],
@@ -32,6 +32,6 @@ const Text = (props: TextProps) => {
 			{text && <p className={classNames(cls.text__text, {}, textAdditional)}>{text}</p>}
 		</div>
 	);
-};
+});
 
 export default Text;

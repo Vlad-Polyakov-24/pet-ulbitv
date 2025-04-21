@@ -1,4 +1,4 @@
-import type { CSSProperties, ReactElement } from 'react';
+import { memo, type CSSProperties, type ReactElement } from 'react';
 import { DefaultLoader } from '../DefaultLoader/DefaultLoader';
 import { OverlayLoader } from '../OverlayLoader/OverlayLoader';
 import { PageLoader } from '../PageLoader/PageLoader';
@@ -10,7 +10,7 @@ type LoaderProps = {
 	styles?: CSSProperties;
 };
 
-const Loader = (props: LoaderProps) => {
+const Loader = memo((props: LoaderProps) => {
 	const { className, theme = LoaderTheme.DEFAULT, styles } = props;
 
 	const loaderMap: Record<LoaderTheme, () => ReactElement> = {
@@ -20,6 +20,6 @@ const Loader = (props: LoaderProps) => {
 	};
 
 	return loaderMap[theme]();
-};
+});
 
 export default Loader;

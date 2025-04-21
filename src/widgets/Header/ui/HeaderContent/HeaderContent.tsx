@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { memo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch } from '@app/providers/StoreProvider';
 import { useToggle } from '@shared/hooks/useToggle';
@@ -10,7 +10,7 @@ type HeaderContentProps = {
 	isAuth?: boolean;
 };
 
-const HeaderContent = ({ isAuth = false }: HeaderContentProps) => {
+const HeaderContent = memo(({ isAuth = false }: HeaderContentProps) => {
 	const { t } = useTranslation('auth');
 	const { isOpen, open, close } = useToggle();
 	const dispatch = useAppDispatch();
@@ -37,6 +37,6 @@ const HeaderContent = ({ isAuth = false }: HeaderContentProps) => {
 			{isOpen && <LoginModal isOpen={isOpen} onClose={close} />}
 		</>
 	);
-};
+});
 
 export { HeaderContent };

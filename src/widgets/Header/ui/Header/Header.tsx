@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { useSelector } from 'react-redux';
 import { classNames } from '@shared/lib/classNames';
 import { Container } from '@shared/ui/Container';
@@ -9,7 +10,7 @@ interface HeaderProps {
 	className?: string;
 }
 
-const Header = ({ className }: HeaderProps) => {
+const Header = memo(({ className }: HeaderProps) => {
 	const authData = useSelector(getAuthData);
 
 	return (
@@ -19,6 +20,6 @@ const Header = ({ className }: HeaderProps) => {
 			</Container>
 		</header>
 	);
-};
+});
 
 export default Header;

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import { classNames } from '@shared/lib/classNames';
 import { Nav } from '@features/Nav';
 import { ThemeSwitcher } from '@features/ThemeSwitcher';
@@ -10,7 +10,7 @@ interface SidebarProps {
 	className?: string;
 }
 
-const Sidebar = ({ className }: SidebarProps) => {
+const Sidebar = memo(({ className }: SidebarProps) => {
 	const [collapsed, setCollapsed] = useState(false);
 
 	const onToggle = () => {
@@ -35,6 +35,6 @@ const Sidebar = ({ className }: SidebarProps) => {
 			</div>
 		</aside>
 	);
-};
+});
 
 export default Sidebar;
