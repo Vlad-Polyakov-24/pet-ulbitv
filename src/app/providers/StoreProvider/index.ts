@@ -8,4 +8,5 @@ export type {
 	StoreProviderSchema,
 	StoreProviderSchemaKey,
 	ReduxStoreWithManager,
+	ThunkConfig,
 } from './model/types/StoreProvider.types';

@@ -11,7 +11,7 @@ type NavProps = {
 
 const Nav = memo(({ className, collapsed }: NavProps) => {
 	const navLinks = useMemo(() => links.map((item) => (
-		<NavItem item={item} collapsed={collapsed} />
+		<NavItem key={item.to} item={item} collapsed={collapsed} />
 	)), [collapsed]);
 
 	return (

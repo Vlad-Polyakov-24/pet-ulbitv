@@ -9,15 +9,15 @@ import '@shared/config/i18n/i18n';
 import '@app/styles/index.scss';
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <StoreProvider>
-      <BrowserRouter>
-        <ErrorBoundary>
-          <ThemeProvider>
-            <App />
-          </ThemeProvider>
-        </ErrorBoundary>
-      </BrowserRouter>
-    </StoreProvider>
-  </StrictMode>,
+	<StrictMode>
+		<BrowserRouter>
+			<StoreProvider>
+				<ErrorBoundary>
+					<ThemeProvider>
+						<App/>
+					</ThemeProvider>
+				</ErrorBoundary>
+			</StoreProvider>
+		</BrowserRouter>
+	</StrictMode>,
 );

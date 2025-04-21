@@ -1,4 +1,4 @@
 export enum endpoints {
-	BASE = 'http://localhost:8000/',
-	LOGIN = `${endpoints.BASE}login`,
+	BASE = 'http://localhost:8000',
+	LOGIN = '/login',
 }

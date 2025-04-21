@@ -1,3 +1,5 @@
+import type { NavigateOptions, To } from 'react-router';
+import type { AxiosInstance } from 'axios';
 import { createReduxStore } from '../../config/store';
 import type { EnhancedStore } from '@reduxjs/toolkit';
 import type { IUserSchema } from '@entities/User';
@@ -20,3 +22,13 @@ export interface ReduxStoreWithManager extends EnhancedStore<StoreProviderSchema
 export type AppStore = ReturnType<typeof createReduxStore>;
 
 export type AppDispatch = AppStore['dispatch'];
+
+export interface FunkExtraArg {
+	api: AxiosInstance;
+	navigate: (to: To, options?: NavigateOptions) => void;
+}
+
+export interface ThunkConfig<T> {
+	rejectValue: T;
+	extra: FunkExtraArg;
+}
