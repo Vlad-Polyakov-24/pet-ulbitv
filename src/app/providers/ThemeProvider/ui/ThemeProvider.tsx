@@ -13,7 +13,7 @@ const ThemeProvider = (props: ThemeProviderProps) => {
 	const { initialTheme, children } = props;
 	const { getStorage } = useLocalStorage();
 	const defaultTheme = getStorage(localStorageKeys.APP_THEME) as Theme || Theme.LIGHT;
-	const [theme, setTheme] = useState<Theme>(initialTheme || defaultTheme);
+	const [theme, setTheme] = useState<Theme>(initialTheme ?? defaultTheme);
 
 	const defaultProps = useMemo(() => ({
 		theme,

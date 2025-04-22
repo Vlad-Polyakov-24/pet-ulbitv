@@ -1,4 +1,11 @@
 {
   "username": "Username",
-  "password": "Password"
+  "password": "Password",
+  "firstname": "Firstname",
+  "lastname": "Lastname",
+  "age": "Age",
+  "city": "City",
+  "currency": "Currency",
+  "country": "Country",
+  "avatar": "Avatar"
 }

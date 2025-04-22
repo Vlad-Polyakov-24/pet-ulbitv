@@ -3,5 +3,6 @@
   "an unexpected error has occurred": "Сталася непередбачена помилка",
   "reload page": "Оновити сторінку",
   "throw error": "Сгенерувати помилку",
-  "invalid credentials": "Неправильний логін або пароль"
+  "invalid credentials": "Неправильний логін або пароль",
+  "fetch profile failed": "Не вдалося отримати дані профілю"
 }

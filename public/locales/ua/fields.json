@@ -1,4 +1,11 @@
 {
   "username": "Імʼя",
-  "password": "Пароль"
+  "password": "Пароль",
+  "firstname": "Імʼя",
+  "lastname": "Прізвище",
+  "age": "Вік",
+  "city": "Місто",
+  "currency": "Валюта",
+  "country": "Країна",
+  "avatar": "Аватар"
 }

@@ -4,7 +4,7 @@ import { createReducerManager } from '../config/reducerManager';
 import { userReducer } from '@entities/User';
 import { ENV } from '@shared/config/env/env';
 import { $api } from '@shared/api/axios';
-import type { FunkExtraArg, StoreProviderSchema } from '../model/types/StoreProvider.types';
+import type { StoreProviderSchema } from '../model/types/StoreProvider.types';
 
 type CreateReduxStoreProps = {
 	initialState?: StoreProviderSchema;
@@ -28,7 +28,7 @@ export const createReduxStore = (props: CreateReduxStoreProps) => {
 				extraArgument: {
 					api: $api,
 					navigate,
-				} as FunkExtraArg,
+				},
 			},
 		}),
 	});

@@ -25,7 +25,7 @@ export type AppDispatch = AppStore['dispatch'];
 
 export interface FunkExtraArg {
 	api: AxiosInstance;
-	navigate: (to: To, options?: NavigateOptions) => void;
+	navigate?: (to: To, options?: NavigateOptions) => void;
 }
 
 export interface ThunkConfig<T> {

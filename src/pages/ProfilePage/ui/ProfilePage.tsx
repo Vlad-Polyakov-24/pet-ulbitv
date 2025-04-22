@@ -1,7 +1,8 @@
-import { useTranslation } from 'react-i18next';
+import { useEffect } from 'react';
 import { DynamicModuleLoader, type ReducersList } from '@shared/lib/components/DynamicModuleLoader';
+import { useAppDispatch } from '@app/providers/StoreProvider';
 import { Container } from '@shared/ui/Container';
-import { profileReducer } from '@entities/Profile';
+import { ProfileCard, fetchProfileData, profileReducer } from '@entities/Profile';
 import cls from './ProfilePage.module.scss';
 
 const reducers: ReducersList = {
@@ -9,13 +10,17 @@ const reducers: ReducersList = {
 };
 
 const ProfilePage = () => {
-	const { t } = useTranslation('profile');
+	const dispatch = useAppDispatch();
+
+	useEffect(() => {
+		dispatch(fetchProfileData());
+	}, [dispatch]);
 
 	return (
 		<DynamicModuleLoader reducers={reducers}>
 			<section className={cls.profile}>
 				<Container fluid>
-					{t('title')}
+					<ProfileCard />
 				</Container>
 			</section>
 		</DynamicModuleLoader>

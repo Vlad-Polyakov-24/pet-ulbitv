@@ -12,6 +12,7 @@ interface UseThemeResult {
 export function useTheme(): UseThemeResult {
 	const { theme, setTheme } = useContext(ThemeContext);
 	const { setStorage } = useLocalStorage();
+	document.body.className = theme || Theme.LIGHT;
 
 	const toggleTheme = () => {
 		let newTheme: Theme;
