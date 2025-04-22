@@ -11,11 +11,21 @@
 		width: 100%;
 		padding: 5px 10px;
 		border: 1px solid var(--secondary-color);
-		border-radius: 5px;
+		background-color: var(--inverted-bg-color);
+		color: var(--inverted-primary-color);
 
 		&:focus {
 			border-color: transparent;
 			outline: 1px solid var(--primary-color);
+		}
+
+		&:read-only {
+			cursor: default;
+			border-color: var(--color-neutral);
+
+			&:focus {
+				outline: none;
+			}
 		}
 	}
 }

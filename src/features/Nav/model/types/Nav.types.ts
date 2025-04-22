@@ -4,4 +4,5 @@ export interface INavItem {
 	to: string;
 	icon: ReactNode,
 	text: string,
+	authOnly?: boolean;
 }

@@ -19,5 +19,6 @@ export const links: INavItem[] = [
 		to: RoutePath.profile,
 		icon: <ProfileIcon />,
 		text: 'profile',
+		authOnly: true,
 	},
 ];

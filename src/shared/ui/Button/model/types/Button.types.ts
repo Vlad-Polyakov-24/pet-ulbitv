@@ -1,14 +1,15 @@
 export enum ButtonTheme {
 	CLEAR = 'clear',
-	CLEAR_INVERTED = 'clearInverted',
+	CLEAR_INVERTED = 'clear-inverted',
 	OUTLINE = 'outline',
+	OUTLINE_RED = 'outline-red',
 	BACKGROUND = 'background',
-	BACKGROUND_INVERTED = 'backgroundInverted',
+	BACKGROUND_INVERTED = 'background-inverted',
 }
 
 export enum ButtonSize {
-	M = 'size_m',
-	L = 'size_l',
-	XL = 'size_xl',
-	CUSTOM = 'size_custom',
+	M = 'size-m',
+	L = 'size-l',
+	XL = 'size-xl',
+	CUSTOM = 'size-custom',
 }

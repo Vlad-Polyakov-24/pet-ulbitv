@@ -9,7 +9,7 @@
 		background: none;
 		outline: none;
 	}
-	&.clearInverted {
+	&.clear-inverted {
 		padding: 0;
 		border: none;
 		background: none;
@@ -21,12 +21,17 @@
 		color: var(--primary-color);
 		background: none;
 	}
+	&.outline-red {
+		border: 1px solid var(--color-red-light);
+		color: var(--color-red-light);
+		background: none;
+	}
 	&.background {
 		background: var(--bg-color);
 		color: var(--primary-color);
 		border: none;
 	}
-	&.backgroundInverted {
+	&.background-inverted {
 		background: var(--inverted-bg-color);
 		color: var(--inverted-primary-color);
 		border: none;
@@ -35,25 +40,25 @@
 	&.square {
 		padding: 0;
 	}
-	&.square.size_m {
+	&.square.size-m {
 		width: var(--font-line-m);
 		height: var(--font-line-m);
 	}
-	&.square.size_l {
+	&.square.size-l {
 		width: var(--font-line-l);
 		height: var(--font-line-l);
 	}
-	&.square.size_xl {
+	&.square.size-xl {
 		width: var(--font-line-xl);
 		height: var(--font-line-xl);
 	}
-	&.size_m {
+	&.size-m {
 		font: var(--font-m);
 	}
-	&.size_l {
+	&.size-l {
 		font: var(--font-l);
 	}
-	&.size_xl {
+	&.size-xl {
 		font: var(--font-xl);
 	}
 

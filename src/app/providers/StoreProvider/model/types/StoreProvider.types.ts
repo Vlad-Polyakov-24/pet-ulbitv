@@ -31,4 +31,5 @@ export interface FunkExtraArg {
 export interface ThunkConfig<T> {
 	rejectValue: T;
 	extra: FunkExtraArg;
+	state: StoreProviderSchema;
 }

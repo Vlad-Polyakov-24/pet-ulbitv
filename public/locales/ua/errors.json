@@ -4,5 +4,6 @@
   "reload page": "Оновити сторінку",
   "throw error": "Сгенерувати помилку",
   "invalid credentials": "Неправильний логін або пароль",
-  "fetch profile failed": "Не вдалося отримати дані профілю"
+  "fetch profile failed": "Не вдалося отримати дані профілю!",
+  "try reload page": "Спробуйте оновити сторінку!"
 }

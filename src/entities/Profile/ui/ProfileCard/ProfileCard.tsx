@@ -1,47 +1,56 @@
 import { memo } from 'react';
-import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { classNames } from '@shared/lib/classNames';
-import { Text } from '@shared/ui/Text';
-import { Button, ButtonTheme } from '@shared/ui/Button';
-import { Input } from '@shared/ui/Input';
-import { getProfileData } from '../../model/selectors/getProfileData/getProfileData';
-import { getProfileIsLoading } from '../../model/selectors/getProfileIsLoading/getProfileIsLoading';
-import { getProfileError } from '../../model/selectors/getProfileError/getProfileError';
+import { Text, TextAlign, TextColor } from '@shared/ui/Text';
+import { Loader } from '@shared/ui/Loader';
+import { Avatar } from '@shared/ui/Avatar';
+import { ProfileForm } from '../ProfileForm/ProfileForm';
+import type { IProfile } from '../../model/types/Profile.types';
 import cls from './ProfileCard.module.scss';
 
 type ProfileCardProps = {
 	className?: string;
+	profile?: IProfile;
+	isLoading?: boolean;
+	error?: string;
+	readonly?: boolean;
+	onChangeProfile?: <T extends keyof IProfile>(value: IProfile[T], field: T) => void;
+	handleSubmit?: () => void;
 };
 
 const ProfileCard = memo((props: ProfileCardProps) => {
-	const { className } = props;
-	const { t: tGlobal } = useTranslation();
-	const { t: tProfile } = useTranslation('profile');
-	const { t: tFields } = useTranslation('fields');
-	const data = useSelector(getProfileData);
-	const isLoading = useSelector(getProfileIsLoading);
-	const error = useSelector(getProfileError);
+	const { className, isLoading, error, profile, readonly, onChangeProfile, handleSubmit } = props;
+	const { t: tErrors } = useTranslation('errors');
+	let content;
 
-	console.log(isLoading);
-	console.log(error);
+	if (isLoading) {
+		content = <Loader className={'m-centred'} />;
+	} else if (error) {
+		content = (
+			<Text
+				title={tErrors('fetch profile failed')}
+				text={tErrors('try reload page')}
+				align={TextAlign.CENTER}
+				color={TextColor.RED_LIGHT}
+			/>
+		);
+	} else {
+		content = (
+			<>
+				{profile?.avatar && <Avatar className={'m-centred'} src={profile.avatar} alt={'Avatar'} />}
+				<ProfileForm
+					profile={profile}
+					readonly={readonly}
+					onChangeProfile={onChangeProfile}
+					handleSubmit={handleSubmit}
+				/>
+			</>
+		);
+	}
 
 	return (
-		<div className={classNames(cls.card, {}, [className])}>
-			<div className={cls.card__head}>
-				<Text title={tProfile('profile')} />
-				<Button theme={ButtonTheme.OUTLINE}>{tGlobal('edit')}</Button>
-			</div>
-			<div className={cls.card__body}>
-				<Input
-					value={data?.firstname}
-					placeholder={tFields('firstname')}
-				/>
-				<Input
-					value={data?.lastname}
-					placeholder={tFields('lastname')}
-				/>
-			</div>
+		<div className={classNames(cls.card, { [cls.edit]: !readonly }, [className])}>
+			{content}
 		</div>
 	);
 });

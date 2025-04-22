@@ -14,3 +14,9 @@ export enum TextSize {
 	M = 'size-m',
 	L = 'size-l',
 }
+
+export enum TextAlign {
+	LEFT = 'align-left',
+	CENTER = 'align-center',
+	RIGHT = 'align-right',
+}

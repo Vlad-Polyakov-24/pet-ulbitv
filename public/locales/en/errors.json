@@ -4,5 +4,6 @@
   "reload page": "Reload page",
   "throw error": "Throw error",
   "invalid credentials": "Incorrect login or password",
-  "fetch profile failed": "Fetch profile failed"
+  "fetch profile failed": "Fetch profile failed!",
+  "try reload page": "Try to reload page!"
 }
