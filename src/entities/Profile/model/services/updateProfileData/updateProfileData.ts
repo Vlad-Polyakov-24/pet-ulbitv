@@ -5,7 +5,7 @@ import { endpoints } from '@shared/const/endpoints';
 import type { ThunkConfig } from '@app/providers/StoreProvider';
 import { type IProfile, ValidateProfileErrors, ValidateProfileErrorsMap } from '../../types/Profile.types';
 
-export const updateProfileData = createAsyncThunk<IProfile, void, ThunkConfig<ValidateProfileErrorsMap>>(
+export const updateProfileData = createAsyncThunk<IProfile, unknown, ThunkConfig<ValidateProfileErrorsMap>>(
 	'profile/updateProfileData',
 	async (_, thunkAPI) => {
 		const { rejectWithValue, extra, getState } = thunkAPI;
@@ -18,6 +18,11 @@ export const updateProfileData = createAsyncThunk<IProfile, void, ThunkConfig<Va
 
 		try {
 			const response = await extra.api.put<IProfile>(endpoints.PROFILE, formData);
+
+			if (!response.data) {
+				throw new Error();
+			}
+
 			return response.data;
 		} catch (e) {
 			console.error(e);
