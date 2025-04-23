@@ -9,10 +9,11 @@ type CurrencySelectProps = {
 	value?: Country;
 	onChange?: (value: Country) => void;
 	disabled?: boolean;
+	error?: string;
 };
 
 const CountrySelect = memo((props: CurrencySelectProps) => {
-	const { className, label, value, onChange, disabled } = props;
+	const { onChange, ...rest } = props;
 
 	const handleChange = useCallback(
 		(value: string) => {
@@ -23,12 +24,9 @@ const CountrySelect = memo((props: CurrencySelectProps) => {
 
 	return (
 		<Select
-			className={className}
 			options={countrySelectOptions}
-			label={label}
-			value={value}
 			onChange={handleChange}
-			disabled={disabled}
+			{...rest}
 		/>
 	);
 });

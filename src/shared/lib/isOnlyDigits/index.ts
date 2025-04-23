@@ -1,0 +1,1 @@
+export { isOnlyDigits } from './isOnlyDigits';

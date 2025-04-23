@@ -1,5 +1,6 @@
 import { memo, useMemo, type ChangeEvent, type SelectHTMLAttributes } from 'react';
-import { classNames } from '@shared/lib/classNames';
+import { classNames, type Mods } from '@shared/lib/classNames';
+import { ErrorMessage } from '@shared/ui/ErrorMessage';
 import type { ISelectOptions } from '../model/types/Select.types';
 import cls from './Select.module.scss';
 
@@ -7,11 +8,15 @@ interface SelectProps extends Omit<SelectHTMLAttributes<HTMLSelectElement>, 'onC
 	className?: string;
 	label?: string;
 	onChange?: (value: string) => void;
-	options: ISelectOptions[]
+	options: ISelectOptions[];
+	error?: string;
 }
 
 const Select = memo((props: SelectProps) => {
-	const { className, label, onChange, options, ...rest } = props;
+	const { className, label, onChange, options, error, ...rest } = props;
+	const mods: Mods = {
+		[cls.error]: error,
+	};
 
 	const handleOnChange = (e: ChangeEvent<HTMLSelectElement>) => {
 		onChange?.(e.target.value);
@@ -22,7 +27,7 @@ const Select = memo((props: SelectProps) => {
 	)), [options]);
 
 	return (
-		<label className={classNames(cls.field, {}, [className])}>
+		<label className={classNames(cls.field, mods, [className])}>
 			{label && <span className={cls.field__label}>{label}</span>}
 			<select
 				className={cls.field__select}
@@ -31,6 +36,7 @@ const Select = memo((props: SelectProps) => {
 			>
 				{...optionsList}
 			</select>
+			{error && <ErrorMessage message={error} />}
 		</label>
 	);
 });

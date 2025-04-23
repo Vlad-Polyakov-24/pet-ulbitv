@@ -5,7 +5,7 @@ import { Input } from '@shared/ui/Input';
 import { CurrencySelect } from '@entities/Currency';
 import { CountrySelect } from '@entities/Country';
 import { inputs } from '../../model/data/profileForm.data';
-import type { IProfile } from '../../model/types/Profile.types';
+import type { IProfile, ValidateProfileErrorsMap } from '../../model/types/Profile.types';
 import cls from './ProfileForm.module.scss';
 
 type ProfileFormProps = {
@@ -14,10 +14,11 @@ type ProfileFormProps = {
 	readonly?: boolean;
 	onChangeProfile?: <T extends keyof IProfile>(value: IProfile[T], field: T) => void;
 	handleSubmit?: () => void;
+	validateErrors?: ValidateProfileErrorsMap;
 };
 
 const ProfileForm = memo((props: ProfileFormProps) => {
-	const { className, profile, readonly, onChangeProfile, handleSubmit } = props;
+	const { className, profile, readonly, onChangeProfile, handleSubmit, validateErrors } = props;
 	const { t: tFields } = useTranslation('fields');
 
 	const onSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -35,6 +36,7 @@ const ProfileForm = memo((props: ProfileFormProps) => {
 					placeholder={tFields(name)}
 					readOnly={readonly}
 					onChange={(value) => onChangeProfile?.(value, name)}
+					error={validateErrors?.[name]?.[0]}
 				/>
 			))}
 			<div className={cls.form__row}>
@@ -46,6 +48,7 @@ const ProfileForm = memo((props: ProfileFormProps) => {
 								label={tFields(name)}
 								disabled={readonly}
 								onChange={(value) => onChangeProfile?.(value, name)}
+								error={validateErrors?.[name]?.[0]}
 							/>
 						)}
 						{name === 'currency' && (
@@ -54,6 +57,7 @@ const ProfileForm = memo((props: ProfileFormProps) => {
 								label={tFields(name)}
 								disabled={readonly}
 								onChange={(value) => onChangeProfile?.(value, name)}
+								error={validateErrors?.[name]?.[0]}
 							/>
 						)}
 					</Fragment>

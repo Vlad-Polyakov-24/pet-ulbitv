@@ -1,0 +1,1 @@
+export const isOnlyDigits = (value?: string) => !!value && /^\d+$/.test(value);

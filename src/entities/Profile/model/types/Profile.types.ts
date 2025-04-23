@@ -1,6 +1,15 @@
 import { Currency } from '@entities/Currency';
 import { Country } from '@entities/Country';
 
+export enum ValidateProfileErrors {
+	SERVER_ERROR = 'server_error',
+	NO_DATA = 'no_data',
+	EMPTY_FIELD = 'empty_field',
+	INVALID_FIELD = 'invalid_field',
+	INVALID_AGE = 'invalid_age',
+	INVALID_AVATAR = 'invalid_avatar',
+}
+
 export interface IProfile {
 	firstname?: string;
 	lastname?: string;
@@ -18,4 +27,7 @@ export interface IProfileSchema {
 	isLoading: boolean;
 	error?: string;
 	readonly: boolean;
+	validateErrors?: ValidateProfileErrorsMap;
 }
+
+export type ValidateProfileErrorsMap = Partial<Record<keyof IProfile | 'global', ValidateProfileErrors[]>>;

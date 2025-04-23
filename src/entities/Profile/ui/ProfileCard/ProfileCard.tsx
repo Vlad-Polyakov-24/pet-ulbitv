@@ -4,8 +4,9 @@ import { classNames } from '@shared/lib/classNames';
 import { Text, TextAlign, TextColor } from '@shared/ui/Text';
 import { Loader } from '@shared/ui/Loader';
 import { Avatar } from '@shared/ui/Avatar';
+import { ErrorMessage } from '@shared/ui/ErrorMessage';
 import { ProfileForm } from '../ProfileForm/ProfileForm';
-import type { IProfile } from '../../model/types/Profile.types';
+import type { IProfile, ValidateProfileErrorsMap } from '../../model/types/Profile.types';
 import cls from './ProfileCard.module.scss';
 
 type ProfileCardProps = {
@@ -16,10 +17,11 @@ type ProfileCardProps = {
 	readonly?: boolean;
 	onChangeProfile?: <T extends keyof IProfile>(value: IProfile[T], field: T) => void;
 	handleSubmit?: () => void;
+	validateErrors?: ValidateProfileErrorsMap;
 };
 
 const ProfileCard = memo((props: ProfileCardProps) => {
-	const { className, isLoading, error, profile, readonly, onChangeProfile, handleSubmit } = props;
+	const { className, isLoading, error, profile, readonly, onChangeProfile, handleSubmit, validateErrors } = props;
 	const { t: tErrors } = useTranslation('errors');
 	let content;
 
@@ -37,12 +39,14 @@ const ProfileCard = memo((props: ProfileCardProps) => {
 	} else {
 		content = (
 			<>
+				{validateErrors?.global && <ErrorMessage message={validateErrors.global?.[0]} />}
 				{profile?.avatar && <Avatar className={'m-centred'} src={profile.avatar} alt={'Avatar'} />}
 				<ProfileForm
 					profile={profile}
 					readonly={readonly}
 					onChangeProfile={onChangeProfile}
 					handleSubmit={handleSubmit}
+					validateErrors={validateErrors}
 				/>
 			</>
 		);

@@ -13,6 +13,7 @@ import {
 	getProfileIsLoading,
 	getProfileError,
 	getProfileReadonly,
+	getProfileValidateErrors,
 	profileActions,
 	type IProfile,
 } from '@entities/Profile';
@@ -28,6 +29,7 @@ const ProfilePage = () => {
 	const isLoading = useSelector(getProfileIsLoading);
 	const error = useSelector(getProfileError);
 	const readonly = useSelector(getProfileReadonly);
+	const validateErrors = useSelector(getProfileValidateErrors);
 
 	useEffect(() => {
 		dispatch(fetchProfileData());
@@ -40,10 +42,15 @@ const ProfilePage = () => {
 		[dispatch]
 	);
 
-	const handleSubmit = useCallback(() => {
-		dispatch(updateProfileData());
-		dispatch(profileActions.setReadonly(true));
-	}, [dispatch]);
+	const handleSubmit = useCallback(
+		async () => {
+			const result = await dispatch(updateProfileData());
+
+			if (result.meta.requestStatus === 'rejected') return;
+
+			dispatch(profileActions.setReadonly(true));
+		},
+		[dispatch]);
 
 	return (
 		<DynamicModuleLoader reducers={reducers}>
@@ -57,6 +64,7 @@ const ProfilePage = () => {
 						readonly={readonly}
 						onChangeProfile={onChangeProfile}
 						handleSubmit={handleSubmit}
+						validateErrors={validateErrors}
 					/>
 				</Container>
 			</section>
