@@ -3,7 +3,7 @@ import { endpoints } from '@shared/const/endpoints';
 import type { ThunkConfig } from '@app/providers/StoreProvider';
 import type { IProfile } from '../../types/Profile.types';
 
-export const fetchProfileData = createAsyncThunk<IProfile, unknown, ThunkConfig<string>>(
+export const fetchProfileData = createAsyncThunk<IProfile, undefined, ThunkConfig<string>>(
 	'profile/fetchProfileData',
 	async (_, thunkAPI) => {
 		const { rejectWithValue, extra } = thunkAPI;

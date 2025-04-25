@@ -5,12 +5,14 @@ import type { EnhancedStore } from '@reduxjs/toolkit';
 import type { IUserSchema } from '@entities/User';
 import type { ILoginSchema } from '@features/AuthByUsername';
 import type { IProfileSchema } from '@entities/Profile';
+import type { IArticleSchema } from '@entities/Article';
 import type { IReducerManager } from '../../config/reducerManager';
 
 export interface StoreProviderSchema {
 	user: IUserSchema;
 	login?: ILoginSchema;
 	profile?: IProfileSchema;
+	article?: IArticleSchema;
 }
 
 export type StoreProviderSchemaKey = keyof StoreProviderSchema;

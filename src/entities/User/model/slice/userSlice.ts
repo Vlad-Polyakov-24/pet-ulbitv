@@ -3,12 +3,14 @@ import { getStorage, removeStorage } from '@shared/lib/localStorage';
 import { localStorageKeys } from '@shared/const/localStorage';
 import type { IUser, IUserSchema } from '../types/User.types';
 
-const initialState: IUserSchema = {};
+const initialState: IUserSchema = {
+	isMounted: false,
+};
 
 const userSlice = createSlice({
 	name: 'user',
 	initialState,
-	reducers: {
+	reducers:  {
 		setAuthData: (state, action: PayloadAction<IUser>) => {
 			state.authData = action.payload;
 		},
@@ -18,6 +20,8 @@ const userSlice = createSlice({
 			if (user) {
 				state.authData = JSON.parse(user);
 			}
+
+			state.isMounted = true;
 		},
 		logout: (state) => {
 			state.authData = undefined;

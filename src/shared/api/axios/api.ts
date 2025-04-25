@@ -5,7 +5,11 @@ import { localStorageKeys } from '@shared/const/localStorage';
 
 export const $api = axios.create({
 	baseURL: endpoints.BASE,
-	headers: {
-		authorization: getStorage(localStorageKeys.AUTH_DATA),
-	},
+});
+
+$api.interceptors.request.use((config) => {
+	if (config.headers) {
+		config.headers.Authorization = getStorage(localStorageKeys.AUTH_DATA) || '';
+	}
+	return config;
 });

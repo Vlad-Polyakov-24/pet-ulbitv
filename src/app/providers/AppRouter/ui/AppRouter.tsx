@@ -1,30 +1,30 @@
-import { Suspense } from 'react';
+import { Suspense, useCallback } from 'react';
 import { Route, Routes } from 'react-router';
 import { Loader, LoaderTheme } from '@shared/ui/Loader';
-import { routeConfig } from '../config/routeConfig';
-import { useSelector } from 'react-redux';
-import { getAuthData } from '@entities/User';
+import RequireAuth from './RequireAuth.tsx';
+import { routeConfig, type AppRouteProps } from '../config/routeConfig';
 
 const AppRouter = () => {
-	const isAuth = useSelector(getAuthData);
 
-	const routes = Object
-		.values(routeConfig)
-		.filter((route) => !(route.authOnly && !isAuth));
+	const renderWithWrapper = useCallback((route: AppRouteProps) => {
+		const element = (
+			<Suspense fallback={<Loader theme={LoaderTheme.PAGE} />}>
+				<main className={'main'}>{route.element}</main>
+			</Suspense>
+		);
+
+		return (
+			<Route
+				key={route.path}
+				path={route. path}
+				element={route.authOnly ? <RequireAuth>{element}</RequireAuth> : element}
+			/>
+		);
+	}, []);
 
 	return (
 		<Routes>
-			{routes.map(({ element, path }) => (
-				<Route
-					key={path}
-					path={path}
-					element={(
-						<Suspense fallback={<Loader theme={LoaderTheme.PAGE} />}>
-							<main className={'main'}>{element}</main>
-						</Suspense>
-					)}
-				/>
-			))}
+			{Object.values(routeConfig).map(renderWithWrapper)}
 		</Routes>
 	);
 };

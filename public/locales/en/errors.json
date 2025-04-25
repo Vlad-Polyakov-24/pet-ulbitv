@@ -11,5 +11,7 @@
   "invalid_field": "Invalid data",
   "invalid_age": "Age must be a number between 1 and 120",
   "invalid_avatar": "Avatar must be a valid URL",
-  "empty_field": "Field can not be empty"
+  "empty_field": "Field can not be empty",
+  "fetch article failed": "Fetch article failed!",
+  "article not found": "Article not found"
 }

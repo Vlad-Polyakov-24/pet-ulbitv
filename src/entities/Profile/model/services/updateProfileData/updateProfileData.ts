@@ -5,7 +5,7 @@ import { endpoints } from '@shared/const/endpoints';
 import type { ThunkConfig } from '@app/providers/StoreProvider';
 import { type IProfile, ValidateProfileErrors, ValidateProfileErrorsMap } from '../../types/Profile.types';
 
-export const updateProfileData = createAsyncThunk<IProfile, unknown, ThunkConfig<ValidateProfileErrorsMap>>(
+export const updateProfileData = createAsyncThunk<IProfile, undefined, ThunkConfig<ValidateProfileErrorsMap>>(
 	'profile/updateProfileData',
 	async (_, thunkAPI) => {
 		const { rejectWithValue, extra, getState } = thunkAPI;

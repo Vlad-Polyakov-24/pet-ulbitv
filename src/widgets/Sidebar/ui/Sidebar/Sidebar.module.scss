@@ -27,7 +27,8 @@
 
 	&__collapse-btn {
 		position: absolute;
-		right: -32px;
-		bottom: 32px;
+		z-index: 90;
+		right: -15px;
+		bottom: 30px;
 	}
 }
