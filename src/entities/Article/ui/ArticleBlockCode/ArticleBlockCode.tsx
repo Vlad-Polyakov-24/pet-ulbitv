@@ -1,17 +1,16 @@
 import { memo } from 'react';
-import { classNames } from '@shared/lib/classNames';
-import cls from './ArticleBlockCode.module.scss';
+import { Code } from '@features/Code';
+import type { IArticleBlockCode } from '../../model/types/Article.types';
 
 type ArticleBlockCodeProps = {
 	className?: string;
+	block: IArticleBlockCode;
 };
 
-const ArticleBlockCode = memo((props: ArticleBlockCodeProps) => {
-	const { className } = props;
-
-	return (
-		<div className={classNames(cls.block, {}, [className])}></div>
-	);
-});
+const ArticleBlockCode = memo(({ className, block }: ArticleBlockCodeProps) => (
+	<div className={className}>
+		<Code text={block.code} />
+	</div>
+));
 
 export { ArticleBlockCode };

@@ -8,6 +8,12 @@
 		border: none;
 		background: none;
 		outline: none;
+
+		@media (hover: hover) {
+			&:hover {
+				text-decoration: underline;
+			}
+		}
 	}
 	&.clear-inverted {
 		padding: 0;
@@ -15,26 +21,58 @@
 		background: none;
 		outline: none;
 		color: var(--inverted-primary-color);
+
+		@media (hover: hover) {
+			&:hover {
+				text-decoration: underline;
+			}
+		}
 	}
 	&.outline {
 		border: 1px solid var(--primary-color);
 		color: var(--primary-color);
 		background: none;
+
+		@media (hover: hover) {
+			&:hover {
+				background: var(--primary-color);
+				color: var(--inverted-primary-color);
+			}
+		}
 	}
 	&.outline-red {
 		border: 1px solid var(--color-red-light);
 		color: var(--color-red-light);
 		background: none;
+
+		@media (hover: hover) {
+			&:hover {
+				background: var(--color-red-light);
+				color: var(--color-white);
+			}
+		}
 	}
 	&.background {
 		background: var(--bg-color);
 		color: var(--primary-color);
 		border: none;
+
+		@media (hover: hover) {
+			&:hover {
+				opacity: .7;
+			}
+		}
 	}
 	&.background-inverted {
 		background: var(--inverted-bg-color);
 		color: var(--inverted-primary-color);
 		border: none;
+
+		@media (hover: hover) {
+			&:hover {
+				opacity: .7;
+			}
+		}
 	}
 
 	&.square {

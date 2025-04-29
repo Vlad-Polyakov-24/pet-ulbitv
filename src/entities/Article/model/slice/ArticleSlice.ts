@@ -12,9 +12,7 @@ const initialState: IArticleSchema = {
 const articleSlice = createSlice({
 	name: 'article',
 	initialState,
-	reducers: {
-
-	},
+	reducers: {},
 	extraReducers: (builder) => {
 		builder
 			.addCase(fetchArticleById.pending, (state) => {

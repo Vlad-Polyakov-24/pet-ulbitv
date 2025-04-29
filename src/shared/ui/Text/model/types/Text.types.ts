@@ -13,6 +13,7 @@ export enum TextSize {
 	S = 'size-s',
 	M = 'size-m',
 	L = 'size-l',
+	XL = 'size-xl',
 }
 
 export enum TextAlign {

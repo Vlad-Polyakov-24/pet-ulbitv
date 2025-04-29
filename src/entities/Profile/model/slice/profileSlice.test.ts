@@ -1,9 +1,9 @@
 import { describe, test, expect } from 'vitest';
-import { profileActions, profileReducer } from '../slice/profileSlice';
+import { profileActions, profileReducer } from './profileSlice';
+import { updateProfileData } from '../services/updateProfileData/updateProfileData';
 import { Country } from '@entities/Country';
 import { Currency } from '@entities/Currency';
-import { IProfileSchema, ValidateProfileErrors } from '../types/Profile.types';
-import { updateProfileData } from '@entities/Profile';
+import { type IProfileSchema, ValidateProfileErrors } from '../types/Profile.types';
 
 const data = {
 	username: 'admin',
@@ -57,7 +57,7 @@ describe('profileSlice', () => {
 
 		expect(profileReducer(
 			state as IProfileSchema,
-			updateProfileData.fulfilled(data, '', ''),
+			updateProfileData.fulfilled(data, '', undefined),
 		)).toEqual({ isLoading: false, validateErrors: undefined, form: data, data });
 	});
 });

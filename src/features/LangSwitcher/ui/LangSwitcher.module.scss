@@ -3,4 +3,11 @@
 	height: 40px;
 	font-size: 40px;
 	line-height: 40px;
+
+	@media (hover: hover) {
+		&:hover {
+			text-decoration: none !important;
+			scale: 1.1;
+		}
+	}
 }

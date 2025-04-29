@@ -1,0 +1,19 @@
+.code {
+	position: relative;
+	display: block;
+	background-color: var(--code-bg);
+	border: 1px solid var(--primary-color);
+
+	&__inner {
+		display: block;
+		padding: 20px;
+		overflow-x: auto;
+	}
+
+	&__btn {
+		position: absolute;
+		top: 20px;
+		right: 20px;
+		padding: 4px;
+	}
+}

@@ -1,13 +1,13 @@
 export enum ArticleType {
-	IT = 'it',
-	SCIENCE = 'science',
-	ECONOMICS = 'economics',
+	IT = 'IT',
+	SCIENCE = 'SCIENCE',
+	ECONOMICS = 'ECONOMICS',
 }
 
 export enum ArticleBlockType {
-	CODE = 'code',
-	TEXT = 'text',
-	IMAGE = 'image',
+	CODE = 'CODE',
+	TEXT = 'TEXT',
+	IMAGE = 'IMAGE',
 }
 
 interface IArticleBlockBase {

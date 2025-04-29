@@ -6,6 +6,12 @@
 	gap: 5px;
 	color: var(--primary-color);
 
+	@media (hover: hover) {
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
 	&.primary {
 		color: var(--primary-color);
 	}

@@ -11,7 +11,6 @@ type ArticlePageProps = {
 };
 
 const ArticlePage = ({ className }: ArticlePageProps) => {
-	// const { t: tArticle } = useTranslation('article');
 	const { t: tErrors } = useTranslation('errors');
 	const { id } = useParams<{ id: string }>();
 
