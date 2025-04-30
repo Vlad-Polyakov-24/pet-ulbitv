@@ -13,5 +13,6 @@
   "invalid_avatar": "Avatar must be a valid URL",
   "empty_field": "Field can not be empty",
   "fetch article failed": "Fetch article failed!",
-  "article not found": "Article not found"
+  "article not found": "Article not found",
+  "fetch article comments failed": "Fetch article comments failed"
 }

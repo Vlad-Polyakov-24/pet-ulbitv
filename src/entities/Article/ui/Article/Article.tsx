@@ -6,7 +6,7 @@ import { ArticleSkeleton } from '../ArticleSkeleton/ArticleSkeleton';
 import { ArticleContent } from '../ArticleContent/ArticleContent';
 import { useAppDispatch } from '@app/providers/StoreProvider';
 import { DynamicModuleLoader, type ReducersList } from '@shared/lib/components/DynamicModuleLoader';
-import { articleReducer } from '../../model/slice/ArticleSlice';
+import { articleReducer } from '../../model/slice/articleSlice';
 import { fetchArticleById } from '../../model/services/fetchArticleById/fetchArticleById';
 import { getArticleData, getArticleError, getArticleIsLoading } from '../../model/selectors/articleSelectors';
 
@@ -27,6 +27,10 @@ const Article = memo(({ className, id }: ArticleProps) => {
 	const error = useSelector(getArticleError);
 	let content;
 
+	useEffect(() => {
+		dispatch(fetchArticleById(id));
+	}, [dispatch, id]);
+
 	if (isLoading) {
 		content = <ArticleSkeleton />;
 	} else if (error) {
@@ -34,10 +38,6 @@ const Article = memo(({ className, id }: ArticleProps) => {
 	} else if (article) {
 		content = <ArticleContent article={article} className={className} />;
 	}
-
-	useEffect(() => {
-		dispatch(fetchArticleById(id));
-	}, [dispatch, id]);
 
 	return (
 		<DynamicModuleLoader reducers={reducers}>

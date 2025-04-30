@@ -3,4 +3,5 @@ export enum endpoints {
 	LOGIN = '/login',
 	PROFILE = '/profile',
 	ARTICLES = '/articles',
+	COMMENTS = '/comments',
 }

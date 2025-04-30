@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest';
-import { articleReducer } from './ArticleSlice.ts';
+import { articleReducer } from './articleSlice';
 import { fetchArticleById } from '../services/fetchArticleById/fetchArticleById';
 import type { IArticleSchema } from '../types/ArticleSchema.types';
 import { ArticleBlockType, ArticleType, type IArticleBlockText } from '../types/Article.types';

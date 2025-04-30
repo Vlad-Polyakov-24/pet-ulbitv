@@ -1,6 +1,7 @@
 import { memo, useMemo, type CSSProperties } from 'react';
 import { classNames } from '@shared/lib/classNames';
 import cls from './Avatar.module.scss';
+import DefaultAvatar from '@shared/assets/images/other/default-avatar.webp';
 
 type AvatarProps = {
 	className?: string;
@@ -22,7 +23,7 @@ const Avatar = memo((props: AvatarProps) => {
 	return (
 		<div className={classNames(cls.image, {}, [className])} style={styles}>
 			<picture>
-				<img src={src} alt={alt} />
+				<img src={src ?? DefaultAvatar} alt={alt} />
 			</picture>
 		</div>
 	);

@@ -13,5 +13,6 @@
   "invalid_avatar": "Аватар має бути дійсною URL-адресою",
   "empty_field": "Поле не може бути порожнім",
   "fetch article failed": "Не вдалося отримати статтю!",
-  "article not found": "Стаття не знайдена"
+  "article not found": "Стаття не знайдена",
+  "fetch article comments failed": "Не вдалося отримати коментарі до статті"
 }
