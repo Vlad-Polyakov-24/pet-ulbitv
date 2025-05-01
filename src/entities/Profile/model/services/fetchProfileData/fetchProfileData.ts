@@ -3,13 +3,13 @@ import { endpoints } from '@shared/const/endpoints';
 import type { ThunkConfig } from '@app/providers/StoreProvider';
 import type { IProfile } from '../../types/Profile.types';
 
-export const fetchProfileData = createAsyncThunk<IProfile, undefined, ThunkConfig<string>>(
+export const fetchProfileData = createAsyncThunk<IProfile, string, ThunkConfig<string>>(
 	'profile/fetchProfileData',
-	async (_, thunkAPI) => {
+	async (profileId, thunkAPI) => {
 		const { rejectWithValue, extra } = thunkAPI;
 
 		try {
-			const response = await extra.api.get<IProfile>(endpoints.PROFILE);
+			const response = await extra.api.get<IProfile>(`${endpoints.PROFILE}/${profileId}`);
 
 			if (!response.data) {
 				throw new Error();

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useParams } from 'react-router';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -9,9 +9,11 @@ import { Container } from '@shared/ui/Container';
 import { Text, TextAlign, TextSize } from '@shared/ui/Text';
 import { Article } from '@entities/Article';
 import { CommentList } from '@entities/Comment';
+import { AddCommentForm } from '@features/AddComment';
 import { articleCommentsSliceReducer, getArticleComments } from '../../model/slices/articleCommentsSlice';
 import { getArticleCommentsIsLoading } from '../../model/selectors/articleComments';
 import { fetchCommentsByArticleId } from '../../model/services/fetchCommentsByArticleId/fetchCommentsByArticleId';
+import { addCommentForArticle } from '../../model/services/addCommentForArticle/addCommentForArticle';
 import cls from './ArticlePage.module.scss';
 
 type ArticlePageProps = {
@@ -34,6 +36,10 @@ const ArticlePage = ({ className }: ArticlePageProps) => {
 		dispatch(fetchCommentsByArticleId(id));
 	}, [dispatch, id]);
 
+	const handleSendComment = useCallback((comment: string) => {
+		dispatch(addCommentForArticle(comment));
+	}, [dispatch]);
+
 	return (
 		<DynamicModuleLoader reducers={reducers}>
 			<section className={classNames(cls.article, {}, [className])}>
@@ -42,6 +48,7 @@ const ArticlePage = ({ className }: ArticlePageProps) => {
 						<>
 							<Article id={id} />
 							<Text title={tComments('comments')} size={TextSize.XL} />
+							<AddCommentForm handleSendComment={handleSendComment} />
 							<CommentList isLoading={commentsIsLoading} comments={comments} />
 						</>
 					) : (

@@ -3,7 +3,7 @@ import { Country } from '@entities/Country';
 
 export enum ValidateProfileErrors {
 	SERVER_ERROR = 'server_error',
-	NO_DATA = 'no_data',
+	NO_DATA = 'no_profile_data',
 	EMPTY_FIELD = 'empty_field',
 	INVALID_FIELD = 'invalid_field',
 	INVALID_AGE = 'invalid_age',
@@ -11,6 +11,7 @@ export enum ValidateProfileErrors {
 }
 
 export interface IProfile {
+	id?: string;
 	firstname?: string;
 	lastname?: string;
 	age?: string;

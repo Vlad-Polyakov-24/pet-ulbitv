@@ -7,12 +7,14 @@
   "fetch profile failed": "Fetch profile failed!",
   "try reload page": "Try to reload page!",
   "server_error": "Server error",
-  "no_data": "No profile data found",
+  "no_profile_data": "No profile data found",
   "invalid_field": "Invalid data",
   "invalid_age": "Age must be a number between 1 and 120",
   "invalid_avatar": "Avatar must be a valid URL",
   "empty_field": "Field can not be empty",
   "fetch article failed": "Fetch article failed!",
   "article not found": "Article not found",
-  "fetch article comments failed": "Fetch article comments failed"
+  "fetch article comments failed": "Fetch article comments failed",
+  "no data": "Data not found",
+  "send comment error": "Send comment error"
 }

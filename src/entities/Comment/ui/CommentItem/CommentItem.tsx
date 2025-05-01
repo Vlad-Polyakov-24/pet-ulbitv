@@ -3,6 +3,8 @@ import { classNames } from '@shared/lib/classNames';
 import { Avatar } from '@shared/ui/Avatar';
 import { Text } from '@shared/ui/Text';
 import { Skeleton } from '@shared/ui/Skeleton';
+import { AppLink } from '@shared/ui/AppLink';
+import { RoutePath } from '@app/providers/AppRouter';
 import type { IComment } from '../../model/types/Comment.types';
 import cls from './CommentItem.module.scss';
 
@@ -13,7 +15,7 @@ type CommentItemProps = {
 };
 
 const CommentItem = memo((props: CommentItemProps) => {
-	const { className, comment: { user: { username, avatar }, text }, isLoading } = props;
+	const { className, comment: { user: { username, avatar, id }, text }, isLoading } = props;
 
 	const content = isLoading ? (
 		<>
@@ -25,10 +27,10 @@ const CommentItem = memo((props: CommentItemProps) => {
 		</>
 	) : (
 		<>
-			<div className={cls.comment__header}>
+			<AppLink to={`${RoutePath.profile}${id}`}>
 				<Avatar src={avatar} alt={username} size={30} />
 				<Text title={username} />
-			</div>
+			</AppLink>
 			<Text text={text} />
 		</>
 	);

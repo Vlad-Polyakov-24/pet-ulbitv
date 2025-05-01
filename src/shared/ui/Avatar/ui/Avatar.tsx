@@ -21,7 +21,7 @@ const Avatar = memo((props: AvatarProps) => {
 	}), [borderRadius, size]);
 
 	return (
-		<div className={classNames(cls.image, {}, [className])} style={styles}>
+		<div className={classNames(cls.avatar, {}, [className])} style={styles}>
 			<picture>
 				<img src={src ?? DefaultAvatar} alt={alt} />
 			</picture>

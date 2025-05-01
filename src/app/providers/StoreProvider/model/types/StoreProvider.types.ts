@@ -8,6 +8,7 @@ import type { ILoginSchema } from '@features/AuthByUsername';
 import type { IProfileSchema } from '@entities/Profile';
 import type { IArticleSchema } from '@entities/Article';
 import type { IArticleCommentsSchema } from '@pages/ArticlePage';
+import type { IAddCommentSchema } from '@features/AddComment';
 
 export interface StoreProviderSchema {
 	user: IUserSchema;
@@ -15,6 +16,7 @@ export interface StoreProviderSchema {
 	profile?: IProfileSchema;
 	article?: IArticleSchema;
 	articleComments?: IArticleCommentsSchema;
+	addComment?: IAddCommentSchema;
 }
 
 export type StoreProviderSchemaKey = keyof StoreProviderSchema;

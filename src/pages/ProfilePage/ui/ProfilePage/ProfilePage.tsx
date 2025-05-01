@@ -1,5 +1,6 @@
 import { useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { useParams } from 'react-router';
 import { DynamicModuleLoader, type ReducersList } from '@shared/lib/components/DynamicModuleLoader';
 import { useAppDispatch } from '@app/providers/StoreProvider';
 import { Container } from '@shared/ui/Container';
@@ -23,7 +24,8 @@ const reducers: ReducersList = {
 	profile: profileReducer,
 };
 
-const ProfilePage = () => {
+const ProfilePage = () =>  {
+	const { id } = useParams<{ id: string }>();
 	const dispatch = useAppDispatch();
 	const profile = useSelector(getProfileForm);
 	const isLoading = useSelector(getProfileIsLoading);
@@ -32,8 +34,10 @@ const ProfilePage = () => {
 	const validateErrors = useSelector(getProfileValidateErrors);
 
 	useEffect(() => {
-		dispatch(fetchProfileData());
-	}, [dispatch]);
+		if (id) {
+			dispatch(fetchProfileData(id));
+		}
+	}, [dispatch, id]);
 
 	const onChangeProfile = useCallback(
 		<T extends keyof IProfile>(value: IProfile[T], field: T) => {
