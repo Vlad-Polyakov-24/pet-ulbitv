@@ -14,6 +14,7 @@
   "articles": [
     {
       "id": "1",
+      "authorId": "1",
       "title": "Javascript news",
       "subtitle": "What's new in JS in 2025?",
       "img": "https://teknotower.com/wp-content/uploads/2020/11/js.png",

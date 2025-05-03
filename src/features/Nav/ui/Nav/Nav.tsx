@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { classNames } from '@shared/lib/classNames';
 import { getAuthData } from '@entities/User';
 import { NavItem } from '../NavItem/NavItem';
-import { links } from '../../model/data/nav.data';
+import { getNavLinks } from '../../model/selectors/navSelectors';
 import cls from './Nav.module.scss';
 
 type NavProps = {
@@ -13,12 +13,13 @@ type NavProps = {
 
 const Nav = memo(({ className, collapsed }: NavProps) => {
 	const isAuth = useSelector(getAuthData);
+	const links = useSelector(getNavLinks);
 
 	const navLinks = useMemo(
 		() => links
 			.filter((link) => !(link.authOnly && !isAuth))
 			.map((item) => <NavItem key={item.to} item={item} collapsed={collapsed}/>),
-		[collapsed, isAuth]);
+		[collapsed, isAuth, links]);
 
 	return (
 		<nav className={classNames(cls.nav, {}, [className])}>

@@ -8,11 +8,12 @@ type ImageProps = {
 	alt?: string;
 	width?: CSSProperties['width'];
 	height?: CSSProperties['height'];
+	objectFit?: CSSProperties['objectFit'];
 	styles?: CSSProperties;
 };
 
 const Image = memo((props: ImageProps) => {
-	const { className, src, alt = 'image', width = '100%', height, styles } = props;
+	const { className, src, alt = 'image', width = '100%', height, objectFit = 'cover', styles } = props;
 
 	const style: CSSProperties = {
 		width,
@@ -23,7 +24,7 @@ const Image = memo((props: ImageProps) => {
 	return (
 		<div className={classNames(cls.img, {}, [className])} style={style}>
 			<picture>
-				<img src={src} alt={alt} />
+				<img src={src} alt={alt} style={{ objectFit }} />
 			</picture>
 		</div>
 	);

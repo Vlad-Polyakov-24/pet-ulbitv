@@ -7,6 +7,8 @@ import cls from './Text.module.scss';
 
 type TextProps = {
 	className?: string;
+	titleClassName?: string;
+	textClassName?: string;
 	styles?: CSSProperties;
 	title?: string;
 	text?: string;
@@ -16,16 +18,18 @@ type TextProps = {
 };
 
 const Text = memo((props: TextProps) => {
-	const { className, styles, title, text, color, size, align } = props;
+	const { className, titleClassName, textClassName, styles, title, text, color, size, align } = props;
 	const titleAdditional: Additional = [
 		cls[getColorClass('title', color)],
 		cls[getSizeClass('title', size)],
 		cls[getAlignClass('title', align)],
+		titleClassName,
 	];
 	const textAdditional: Additional = [
 		cls[getColorClass('text', color)],
 		cls[getSizeClass('text', size)],
 		cls[getAlignClass('text', align)],
+		textClassName,
 	];
 
 	if (!title && !text) return null;

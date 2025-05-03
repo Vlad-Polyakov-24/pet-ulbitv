@@ -1,0 +1,16 @@
+.articles {
+	&__list {
+		&.grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+			justify-content: start;
+			gap: 20px;
+		}
+
+		&.single {
+			display: flex;
+			flex-direction: column;
+			gap: 20px;
+		}
+	}
+}

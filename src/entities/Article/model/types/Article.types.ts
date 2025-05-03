@@ -1,3 +1,5 @@
+import type { IUser } from '@entities/User';
+
 export enum ArticleType {
 	IT = 'IT',
 	SCIENCE = 'SCIENCE',
@@ -8,6 +10,11 @@ export enum ArticleBlockType {
 	CODE = 'CODE',
 	TEXT = 'TEXT',
 	IMAGE = 'IMAGE',
+}
+
+export enum ArticleView {
+	GRID = 'grid',
+	SINGLE = 'single',
 }
 
 interface IArticleBlockBase {
@@ -42,6 +49,7 @@ export type IArticleBlock = ArticleBlockTypeMap[keyof ArticleBlockTypeMap];
 
 export interface IArticle {
 	id: string;
+	author: IUser;
 	title: string;
 	subtitle: string;
 	img: string;
