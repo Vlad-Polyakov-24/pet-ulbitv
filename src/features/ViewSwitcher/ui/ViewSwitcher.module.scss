@@ -1,0 +1,15 @@
+.switcher {
+	display: flex;
+
+	&__btn {
+		&.current {
+			color: var(--color-red-light);
+		}
+
+		@media (hover: hover) {
+			&:hover {
+				scale: 1.1;
+			}
+		}
+	}
+}

@@ -16,5 +16,6 @@
   "article not found": "Стаття не знайдена",
   "fetch article comments failed": "Не вдалося отримати коментарі до статті",
   "no data": "Дані не знайдені",
-  "send comment error": "Помилка надсилання коментаря"
+  "send comment error": "Помилка надсилання коментаря",
+  "fetch articles list failed": "Не вдалося отримати список статей"
 }

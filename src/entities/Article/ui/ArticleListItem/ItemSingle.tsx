@@ -19,7 +19,7 @@ type ItemSingleProps = {
 
 const ItemSingle = memo((props: ItemSingleProps) => {
 	const { className, article, handleOpenArticle } = props;
-	const { author: { avatar, username }, createdAt, title, type, img, views, blocks } = article;
+	const { user: { avatar, username }, createdAt, title, type, img, views, blocks } = article;
 	const { t: tArticle } = useTranslation('article');
 	const textParagraph = blocks
 		.find((block) => block.type === ArticleBlockType.TEXT)?.paragraphs[0];
@@ -28,7 +28,7 @@ const ItemSingle = memo((props: ItemSingleProps) => {
 		<Card className={classNames(cls.card, {}, [className])}>
 			<header className={classNames(cls.card__row, {}, [cls.header, cls.spaceBetween])}>
 				<div className={cls.card__row}>
-					<Avatar src={avatar} alt={username} size={30} />
+					<Avatar src={avatar ?? ''} alt={username} size={30} />
 					<Text text={username} size={TextSize.S} />
 				</div>
 				<Text text={createdAt} />

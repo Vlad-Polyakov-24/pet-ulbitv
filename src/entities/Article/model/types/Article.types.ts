@@ -49,7 +49,7 @@ export type IArticleBlock = ArticleBlockTypeMap[keyof ArticleBlockTypeMap];
 
 export interface IArticle {
 	id: string;
-	author: IUser;
+	user: IUser;
 	title: string;
 	subtitle: string;
 	img: string;

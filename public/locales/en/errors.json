@@ -16,5 +16,6 @@
   "article not found": "Article not found",
   "fetch article comments failed": "Fetch article comments failed",
   "no data": "Data not found",
-  "send comment error": "Send comment error"
+  "send comment error": "Send comment error",
+  "fetch articles list failed": "Fetch articles list failed"
 }
