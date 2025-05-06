@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { classNames } from '@shared/lib/classNames';
 import { useAppDispatch } from '@app/providers/StoreProvider';
 import { DynamicModuleLoader, ReducersList } from '@shared/lib/components/DynamicModuleLoader';
+import { Section } from '@shared/ui/Section';
 import { Container } from '@shared/ui/Container';
 import { Text, TextAlign, TextSize } from '@shared/ui/Text';
 import { Button, ButtonTheme } from '@shared/ui/Button';
@@ -50,7 +51,7 @@ const ArticlePage = ({ className }: ArticlePageProps) => {
 
 	return (
 		<DynamicModuleLoader reducers={reducers}>
-			<section className={classNames(cls.article, {}, [className])}>
+			<Section className={classNames(cls.article, {}, [className])}>
 				<Container className={cls.article__container} fluid>
 					{id ? (
 						<>
@@ -66,7 +67,7 @@ const ArticlePage = ({ className }: ArticlePageProps) => {
 						<Text align={TextAlign.CENTER} text={tErrors('article not found')} />
 					)}
 				</Container>
-			</section>
+			</Section>
 		</DynamicModuleLoader>
 	);
 };

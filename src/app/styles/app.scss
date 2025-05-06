@@ -17,8 +17,8 @@ body {
 }
 
 .main {
+	display: flex;
+	flex-direction: column;
 	flex-grow: 1;
-	padding-top: 20px;
-	padding-bottom: 20px;
-	overflow-y: auto;
+	overflow: hidden;
 }

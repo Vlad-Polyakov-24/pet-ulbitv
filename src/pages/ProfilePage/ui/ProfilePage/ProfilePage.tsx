@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { DynamicModuleLoader, type ReducersList } from '@shared/lib/components/DynamicModuleLoader';
 import { useAppDispatch } from '@app/providers/StoreProvider';
+import { Section } from '@shared/ui/Section';
 import { Container } from '@shared/ui/Container';
 import { ProfilePageHeader } from '../ProfilePageHeader/ProfilePageHeader';
 import {
@@ -58,7 +59,7 @@ const ProfilePage = () =>  {
 
 	return (
 		<DynamicModuleLoader reducers={reducers}>
-			<section className={cls.profile}>
+			<Section className={cls.profile}>
 				<Container className={cls.profile__container} fluid>
 					<ProfilePageHeader readonly={readonly} handleSubmit={handleSubmit} />
 					<ProfileCard
@@ -71,7 +72,7 @@ const ProfilePage = () =>  {
 						validateErrors={validateErrors}
 					/>
 				</Container>
-			</section>
+			</Section>
 		</DynamicModuleLoader>
 	);
 };

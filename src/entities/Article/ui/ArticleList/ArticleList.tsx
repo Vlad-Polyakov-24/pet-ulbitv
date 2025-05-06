@@ -25,16 +25,10 @@ const ArticleList = memo((props: ArticleListProps) => {
 
 	return (
 		<div className={classNames(cls.articles, {}, [className])}>
-			{isLoading && (
-				<ul className={classNames(cls.articles__list, {}, [cls[view]])}>
-					{...skeletons}
-				</ul>
-			)}
-			{articles.length > 0 ? (
-				<ul className={classNames(cls.articles__list, {}, [cls[view]])}>
-					{articles.map(renderArticle)}
-				</ul>
-			) : null}
+			<ul className={classNames(cls.articles__list, {}, [cls[view]])}>
+				{articles.map(renderArticle)}
+				{isLoading && skeletons}
+			</ul>
 		</div>
 	);
 });
