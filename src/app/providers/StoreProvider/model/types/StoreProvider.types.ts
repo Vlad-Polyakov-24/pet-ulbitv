@@ -1,9 +1,9 @@
-import type { NavigateOptions, To } from 'react-router';
 import type { AxiosInstance } from 'axios';
 import { createReduxStore } from '../../config/store';
 import type { EnhancedStore } from '@reduxjs/toolkit';
 import type { IReducerManager } from '../../config/reducerManager';
 import type { IUserSchema } from '@entities/User';
+import type { IScrollRestorationSchema } from '@features/ScrollRestoration';
 import type { ILoginSchema } from '@features/AuthByUsername';
 import type { IProfileSchema } from '@entities/Profile';
 import type { IArticleSchema } from '@entities/Article';
@@ -13,6 +13,7 @@ import type { IArticlesPageSchema } from '@pages/ArticlesPage';
 
 export interface StoreProviderSchema {
 	user: IUserSchema;
+	scrollRestoration: IScrollRestorationSchema;
 	login?: ILoginSchema;
 	profile?: IProfileSchema;
 	article?: IArticleSchema;
@@ -33,7 +34,6 @@ export type AppDispatch = AppStore['dispatch'];
 
 export interface FunkExtraArg {
 	api: AxiosInstance;
-	navigate?: (to: To, options?: NavigateOptions) => void;
 }
 
 export interface ThunkConfig<T> {

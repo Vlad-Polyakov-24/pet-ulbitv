@@ -1114,6 +1114,12 @@
       "userId": "1",
       "text": "asd",
       "id": 1
+    },
+    {
+      "articleId": "4",
+      "userId": "1",
+      "text": "asdasd",
+      "id": 2
     }
   ],
   "users": [

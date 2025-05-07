@@ -40,7 +40,7 @@ const AddCommentForm = memo(({ className, handleSendComment }: AddCommentFormPro
 			<form className={classNames(cls.form, {}, [className])} onSubmit={handleSubmit}>
 				<Input
 					placeholder={tComments('enter comment text')}
-					value={comment ?? ''}
+					value={comment}
 					onChange={handleChangeComment}
 				/>
 				<Button type={'submit'}>

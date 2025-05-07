@@ -1,20 +1,19 @@
-import type { NavigateOptions, To } from 'react-router';
 import { configureStore, type ReducersMapObject } from '@reduxjs/toolkit';
 import { createReducerManager } from '../config/reducerManager';
 import { userReducer } from '@entities/User';
+import { scrollRestorationReducer } from '@features/ScrollRestoration';
 import { ENV } from '@shared/config/env/env';
 import { $api } from '@shared/api/axios';
 import type { StoreProviderSchema } from '../model/types/StoreProvider.types';
 
 type CreateReduxStoreProps = {
 	initialState?: StoreProviderSchema;
-	navigate?: (to: To, options?: NavigateOptions) => void;
 };
 
-export const createReduxStore = (props: CreateReduxStoreProps) => {
-	const { initialState, navigate } = props;
+export const createReduxStore = ({ initialState }: CreateReduxStoreProps) => {
 	const rootReducer: ReducersMapObject<StoreProviderSchema> = {
 		user: userReducer,
+		scrollRestoration: scrollRestorationReducer,
 	};
 
 	const reducerManager = createReducerManager(rootReducer);
@@ -27,7 +26,6 @@ export const createReduxStore = (props: CreateReduxStoreProps) => {
 			thunk: {
 				extraArgument: {
 					api: $api,
-					navigate,
 				},
 			},
 		}),

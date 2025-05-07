@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react';
-import { useNavigate } from 'react-router';
 import { Provider } from 'react-redux';
 import { createReduxStore } from '../config/store';
 import type { StoreProviderSchema } from '../model/types/StoreProvider.types';
@@ -10,10 +9,8 @@ type StoreProviderProps = {
 };
 
 const StoreProvider = ({ children, initialState }: StoreProviderProps) => {
-	const navigate = useNavigate();
 	const store = createReduxStore({
 		initialState,
-		navigate,
 	});
 
 	return <Provider store={store}>{children}</Provider>;

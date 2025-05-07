@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { DynamicModuleLoader, type ReducersList } from '@shared/lib/components/DynamicModuleLoader';
 import { useAppDispatch } from '@app/providers/StoreProvider';
-import { Section } from '@shared/ui/Section';
+import { Section } from '@widgets/Section';
 import { Container } from '@shared/ui/Container';
 import { ProfilePageHeader } from '../ProfilePageHeader/ProfilePageHeader';
 import {

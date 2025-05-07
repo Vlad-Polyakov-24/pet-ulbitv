@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { Section } from '@shared/ui/Section';
+import { Section } from '@widgets/Section';
 import { Container } from '@shared/ui/Container';
 import cls from './MainPage.module.scss';
 
