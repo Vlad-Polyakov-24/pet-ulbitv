@@ -1,26 +1,44 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getArticlesPageLimit } from '../../selectors/articlesPageSelectors';
+import { addQueryParams } from '@shared/lib/url/addQueryParams';
+import {
+	getArticlesPageLimit,
+	getArticlesPageNum,
+	getArticlesPageOrder,
+	getArticlesPageSearch,
+	getArticlesPageSort,
+	getArticlesPageType,
+} from '../../selectors/articlesPageSelectors';
 import { endpoints } from '@shared/const/endpoints';
 import type { ThunkConfig } from '@app/providers/StoreProvider';
-import type { IArticle } from '@entities/Article';
+import { ArticleType, type IArticle } from '@entities/Article';
 
 interface FetchArticlesListProps {
-	page?: number;
+	replace?: boolean;
 }
 
-export const fetchArticlesList = createAsyncThunk<IArticle[], FetchArticlesListProps, ThunkConfig<string>>(
+export const fetchArticlesList = createAsyncThunk<IArticle[], FetchArticlesListProps | undefined, ThunkConfig<string>>(
 	'articlesPage/fetchArticlesList',
-	async (props, thunkAPI) => {
+	async (_, thunkAPI) => {
 		const { rejectWithValue, extra, getState } = thunkAPI;
-		const { page = 1 } = props;
 		const limit = getArticlesPageLimit(getState());
+		const page = getArticlesPageNum(getState());
+		const sort = getArticlesPageSort(getState());
+		const order = getArticlesPageOrder(getState());
+		const search = getArticlesPageSearch(getState());
+		const type = getArticlesPageType(getState());
 
 		try {
+			addQueryParams({ sort, order, search, type });
+
 			const response = await extra.api.get<IArticle[]>(endpoints.ARTICLES, {
 				params: {
  					_expand: 'user',
 					_limit: limit,
 					_page: page,
+					_sort: sort,
+					_order: order,
+					q: search,
+					...(type === ArticleType.ALL ? {} : { type_like: type }),
 				},
 			});
 

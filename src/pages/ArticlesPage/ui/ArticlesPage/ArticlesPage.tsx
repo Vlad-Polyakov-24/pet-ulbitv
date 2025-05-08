@@ -5,14 +5,14 @@ import { DynamicModuleLoader, type ReducersList } from '@shared/lib/components/D
 import { useAppDispatch } from '@app/providers/StoreProvider';
 import { Section } from '@widgets/Section';
 import { Container } from '@shared/ui/Container';
-import { ArticleList, ArticleView } from '@entities/Article';
-import { ViewSwitcher } from '@features/ViewSwitcher';
+import { ArticleList } from '@entities/Article';
+import { ArticlesPageFilter } from '../ArticlesPageFilter/ArticlesPageFilter';
 import { articlesPageReducer, getArticles } from '../../model/slices/articlesPageSlice';
 import { fetchNextArticlesPage } from '../../model/services/fetchNextArticlesPage/fetchNextArticlesPage';
 import { initArticlesPage } from '../../model/services/initArticlesPage/initArticlesPage';
-import { changeView } from '../../model/services/changeView/changeView';
 import { getArticlesPageIsLoading, getArticlesPageView } from '../../model/selectors/articlesPageSelectors';
 import cls from './ArticlesPage.module.scss';
+import { useSearchParams } from 'react-router';
 
 type ArticlesPageProps = {
 	className?: string;
@@ -23,18 +23,15 @@ const reducers: ReducersList = {
 };
 
 const ArticlesPage = ({ className }: ArticlesPageProps) => {
+	const [searchParams] = useSearchParams();
 	const dispatch = useAppDispatch();
 	const articles = useSelector(getArticles.selectAll);
 	const isLoading = useSelector(getArticlesPageIsLoading);
 	const view = useSelector(getArticlesPageView);
 
 	useEffect(() => {
-		dispatch(initArticlesPage());
-	}, [dispatch]);
-
-	const handleChangeView = useCallback((view: ArticleView) => {
-		dispatch(changeView({ view }));
-	}, [dispatch]);
+		dispatch(initArticlesPage(searchParams));
+	}, [dispatch, searchParams]);
 
 	const handleLoadNextPage = useCallback(() => {
 		dispatch(fetchNextArticlesPage());
@@ -43,8 +40,8 @@ const ArticlesPage = ({ className }: ArticlesPageProps) => {
 	return (
 		<DynamicModuleLoader reducers={reducers} removeAfterUnmount={false}>
 			<Section onScrollEnd={handleLoadNextPage} className={classNames(cls.articles, {}, [className])} restoreScroll>
-				<Container fluid>
-					<ViewSwitcher currentView={view} onChange={handleChangeView} />
+				<Container className={cls.articles__container} fluid>
+					<ArticlesPageFilter />
 					<ArticleList articles={articles} isLoading={isLoading} view={view} />
 				</Container>
 			</Section>

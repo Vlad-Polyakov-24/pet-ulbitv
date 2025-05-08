@@ -7,5 +7,10 @@
   "city": "City",
   "currency": "Currency",
   "country": "Country",
-  "avatar": "Avatar"
+  "avatar": "Avatar",
+  "sortBy": "Sort by",
+  "search": "Search",
+  "by": "By",
+  "asc": "Ascending",
+  "desc": "Descending"
 }

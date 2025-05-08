@@ -1,0 +1,14 @@
+.sort {
+	display: flex;
+	align-items: center;
+	flex-grow: 1;
+	gap: 10px;
+
+	&__field {
+		max-width: 160px;
+	}
+
+	&__order {
+		max-width: 150px;
+	}
+}

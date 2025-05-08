@@ -3,7 +3,8 @@ import { fetchNextArticlesPage } from './fetchNextArticlesPage';
 import { fetchArticlesList } from '../fetchArticlesList/fetchArticlesList';
 import * as articlesPageSelectors from '../../selectors/articlesPageSelectors';
 import { TestAsyncThunk } from '@shared/lib/tests/TestAsyncThunk';
-import { ArticleView } from '@entities/Article';
+import { ArticleType, ArticleView } from '@entities/Article';
+import { ArticleSortField } from '@widgets/ArticlesFilters';
 
 vi.mock('../fetchArticlesList/fetchArticlesList');
 
@@ -23,12 +24,16 @@ describe('fetchNextArticlesPage', () => {
 				hasMore: true,
 				_inited: false,
 				view: ArticleView.GRID,
+				order: 'asc',
+				search: '',
+				sort: ArticleSortField.CREATED,
+				type: ArticleType.ALL,
 			},
 		});
 		await thunk.callThunk();
 
 		expect(thunk.dispatch).toBeCalledTimes(4);
-		expect(fetchArticlesList).toHaveBeenCalledWith({ page: 3 });
+		expect(fetchArticlesList).toHaveBeenCalledWith();
 	});
 
 	test('fetchArticlesList not called', async () => {
@@ -45,6 +50,10 @@ describe('fetchNextArticlesPage', () => {
 				hasMore: false,
 				_inited: false,
 				view: ArticleView.GRID,
+				order: 'asc',
+				search: '',
+				sort: ArticleSortField.CREATED,
+				type: ArticleType.ALL,
 			},
 		});
 		await thunk.callThunk();

@@ -1,3 +1,10 @@
 {
-  "title": "Articles"
+  "views":  "Views",
+  "title":  "Title",
+  "createdAt": "Created at",
+  "all": "All",
+  "it": "IT",
+  "science": "Science",
+  "economics": "Economics",
+  "articles not found": "Articles not found"
 }

@@ -47,7 +47,7 @@ const Section = (props: SectionProps) => {
 	return (
 		<section ref={wrapperRef} onScroll={handleScroll} className={classNames(cls.section, {}, [className])}>
 			{children}
-			<div className={cls.section__trigger} ref={triggerRef} />
+			{onScrollEnd && <div className={cls.section__trigger} ref={triggerRef} />}
 		</section>
 	);
 };

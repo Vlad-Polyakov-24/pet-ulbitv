@@ -2,8 +2,10 @@ import { createEntityAdapter, createSlice, type PayloadAction } from '@reduxjs/t
 import { getStorage, setStorage } from '@shared/lib/localStorage';
 import { fetchArticlesList } from '../services/fetchArticlesList/fetchArticlesList';
 import type { StoreProviderSchema } from '@app/providers/StoreProvider';
-import { ArticleView, type IArticle } from '@entities/Article';
+import { ArticleType, ArticleView, type IArticle } from '@entities/Article';
 import { localStorageKeys } from '@shared/const/localStorage';
+import type { SortOrder } from '@shared/types/globals.types';
+import { ArticleSortField } from '@widgets/ArticlesFilters';
 import type { IArticlesPageSchema } from '../types/ArticlesPageSchema';
 
 const articlesAdapter = createEntityAdapter({
@@ -27,6 +29,11 @@ const articlesPageSlice = createSlice({
 		ids: [],
 		entities: {},
 		_inited: false,
+		sort: ArticleSortField.CREATED,
+		order: 'asc',
+		search: '',
+		limit: 9,
+		type: ArticleType.ALL,
 	}),
 	reducers: {
 		setView: (state, action: PayloadAction<ArticleView>) => {
@@ -38,6 +45,18 @@ const articlesPageSlice = createSlice({
 		setPage: (state, action: PayloadAction<number>) => {
 			state.page = action.payload;
 		},
+		setOrder: (state, action: PayloadAction<SortOrder>) => {
+			state.order = action.payload;
+		},
+		setSearch: (state, action: PayloadAction<string>) => {
+			state.search = action.payload;
+		},
+		setSort: (state, action: PayloadAction<ArticleSortField>) => {
+			state.sort = action.payload;
+		},
+		setType: (state, action: PayloadAction<ArticleType>) => {
+			state.type  = action.payload;
+		},
 		initState: (state) => {
 			const view = getStorage(localStorageKeys.ARTICLES_VIEW) as ArticleView || ArticleView.GRID;
 			state.view = view;
@@ -47,14 +66,23 @@ const articlesPageSlice = createSlice({
 	},
 	extraReducers: (builder) => {
 		builder
-			.addCase(fetchArticlesList.pending, (state) => {
+			.addCase(fetchArticlesList.pending, (state, action) => {
 				state.error = undefined;
 				state.isLoading = true;
+
+				if (action.meta.arg?.replace) {
+					articlesAdapter.removeAll(state);
+				}
 			})
-			.addCase(fetchArticlesList.fulfilled, (state, action: PayloadAction<IArticle[]>) => {
+			.addCase(fetchArticlesList.fulfilled, (state, action) => {
 				state.isLoading = false;
-				articlesAdapter.addMany(state, action.payload);
-				state.hasMore = action.payload.length > 0;
+				state.hasMore = action.payload.length >= state.limit;
+
+				if (action.meta.arg?.replace) {
+					articlesAdapter.setAll(state, action.payload);
+				} else {
+					articlesAdapter.addMany(state, action.payload);
+				}
 			})
 			.addCase(fetchArticlesList.rejected, (state, action) => {
 				state.isLoading = false;

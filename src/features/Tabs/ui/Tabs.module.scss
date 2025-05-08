@@ -1,0 +1,15 @@
+.tabs {
+	display: flex;
+	gap: 8px;
+
+	&__item {
+		cursor: pointer;
+		transition: var(--primary-transition);
+
+		@media (hover: hover) {
+			&:hover {
+				scale: 1.1;
+			}
+		}
+	}
+}

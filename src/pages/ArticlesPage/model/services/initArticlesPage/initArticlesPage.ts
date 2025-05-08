@@ -3,16 +3,36 @@ import { fetchArticlesList } from '../fetchArticlesList/fetchArticlesList';
 import { getArticlesPageInited, } from '../../selectors/articlesPageSelectors';
 import { articlesPageActions } from '../../slices/articlesPageSlice';
 import type { ThunkConfig } from '@app/providers/StoreProvider';
+import { SortOrder } from '@shared/types/globals.types';
+import { ArticleSortField } from 'src/widgets/ArticlesFilters';
+import { ArticleType } from '@entities/Article';
 
-export const initArticlesPage = createAsyncThunk<void, undefined, ThunkConfig<string>>(
+export const initArticlesPage = createAsyncThunk<void, URLSearchParams, ThunkConfig<string>>(
 	'articlesPage/initArticlesPage',
-	async (_, thunkAPI) => {
-		const { getState, dispatch } = thunkAPI;
-		const inited = getArticlesPageInited(getState());
+	async (searchParams, { getState, dispatch }) => {
+		if (getArticlesPageInited(getState())) return;
 
-		if (!inited) {
-			dispatch(articlesPageActions.initState());
-			dispatch(fetchArticlesList({ page: 1 }));
+		const queryParams = {
+			order: searchParams.get('order') as SortOrder,
+			sort: searchParams.get('sort') as ArticleSortField,
+			search: searchParams.get('search'),
+			type: searchParams.get('type') as ArticleType,
+		};
+
+		if (queryParams.order) {
+			dispatch(articlesPageActions.setOrder(queryParams.order));
 		}
+		if (queryParams.sort) {
+			dispatch(articlesPageActions.setSort(queryParams.sort));
+		}
+		if (queryParams.search) {
+			dispatch(articlesPageActions.setSearch(queryParams.search));
+		}
+		if (queryParams.type) {
+			dispatch(articlesPageActions.setType(queryParams.type));
+		}
+
+		dispatch(articlesPageActions.initState());
+		dispatch(fetchArticlesList());
 	},
 );

@@ -8,6 +8,36 @@
 		}
 	}
 
+	&.horizontal {
+		display: grid;
+		grid-template-columns: auto 1fr;
+		grid-template-rows: auto auto;
+		column-gap: 5px;
+
+		.field {
+			&__label {
+				grid-column: 1;
+				grid-row: 1;
+				align-self: center;
+			}
+
+			&__select {
+				grid-column: 2;
+				grid-row: 1;
+			}
+
+			&__error {
+				grid-column: 1 / span 2;
+				grid-row: 2;
+			}
+		}
+	}
+	&.vertical {
+		.field__select {
+			margin-top: 2px;
+		}
+	}
+
 	&__label {
 		display: block;
 	}

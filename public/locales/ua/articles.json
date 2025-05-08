@@ -1,3 +1,10 @@
 {
-  "title": "Статті"
+  "views":  "Перегляди",
+  "title":  "Назва",
+  "createdAt": "Дата",
+  "all": "Всі",
+  "it": "IT",
+  "science": "Наука",
+  "economics": "Економіка",
+  "articles not found": "Статті не знайдено"
 }
