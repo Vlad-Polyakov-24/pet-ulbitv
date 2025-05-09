@@ -6,7 +6,7 @@ import {
 	getArticlesPageOrder,
 	getArticlesPageSearch,
 	getArticlesPageSort,
-	getArticlesPageType,
+	getArticlesPageTypes,
 } from '../../selectors/articlesPageSelectors';
 import { endpoints } from '@shared/const/endpoints';
 import type { ThunkConfig } from '@app/providers/StoreProvider';
@@ -25,10 +25,15 @@ export const fetchArticlesList = createAsyncThunk<IArticle[], FetchArticlesListP
 		const sort = getArticlesPageSort(getState());
 		const order = getArticlesPageOrder(getState());
 		const search = getArticlesPageSearch(getState());
-		const type = getArticlesPageType(getState());
+		const types = getArticlesPageTypes(getState());
 
 		try {
-			addQueryParams({ sort, order, search, type });
+			addQueryParams({
+				sort,
+				order,
+				search,
+				type: types.includes(ArticleType.ALL) ? [] : types,
+			});
 
 			const response = await extra.api.get<IArticle[]>(endpoints.ARTICLES, {
 				params: {
@@ -38,7 +43,7 @@ export const fetchArticlesList = createAsyncThunk<IArticle[], FetchArticlesListP
 					_sort: sort,
 					_order: order,
 					q: search,
-					...(type === ArticleType.ALL ? {} : { type_like: type }),
+					...(types.includes(ArticleType.ALL) ? {} : { type_like: types }),
 				},
 			});
 

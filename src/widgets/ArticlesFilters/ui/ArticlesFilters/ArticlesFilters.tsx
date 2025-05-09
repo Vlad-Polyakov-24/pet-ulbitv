@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { classNames } from '@shared/lib/classNames';
 import { Input } from '@shared/ui/Input';
 import { ViewSwitcher } from '@features/ViewSwitcher';
-import { Tabs, type ITab } from '@features/Tabs';
+import { ArticlesTabs } from '../ArticlesTabs/ArticlesTabs';
 import { ArticlesSort } from '../ArticlesSort/ArticlesSort';
 import { generateTabsData } from '../../model/data/articlesTabs.data';
 import { ArticleType, ArticleView } from '@entities/Article';
@@ -17,12 +17,12 @@ type ArticlesFiltersProps = {
 	sort: ArticleSortField;
 	order: SortOrder;
 	search: string;
-	type: ArticleType;
+	types: ArticleType[];
 	handleChangeView: (view: ArticleView) => void;
 	handleChangeSort: (newSort: ArticleSortField) => void;
 	handleChangeOrder: (newOrder: SortOrder) => void;
 	handleChangeSearch: (search: string) => void;
-	handleChangeType: (tab: ITab) => void;
+	handleChangeType: (types: ArticleType[]) => void;
 };
 
 const ArticlesFilters = memo((props: ArticlesFiltersProps) => {
@@ -32,7 +32,7 @@ const ArticlesFilters = memo((props: ArticlesFiltersProps) => {
 		sort,
 		order,
 		search,
-		type,
+		types,
 		handleChangeView,
 		handleChangeSort,
 		handleChangeOrder,
@@ -56,9 +56,9 @@ const ArticlesFilters = memo((props: ArticlesFiltersProps) => {
 				<ViewSwitcher currentView={view} onChange={handleChangeView} />
 			</div>
 			<Input value={search} onChange={handleChangeSearch} placeholder={tFields('search')} />
-			<Tabs
+			<ArticlesTabs
 				tabs={tabs}
-				value={type}
+				currentTypes={types}
 				onTabClick={handleChangeType}
 			/>
 		</div>

@@ -1,8 +1,16 @@
-export const getQueryParams = (params: Record<string, string>)=> {
+export const getQueryParams = (params: Record<string, string | string[]>)=> {
 	const searchParams = new URLSearchParams(window.location.search);
 
 	Object.entries(params).forEach(([key, value]) => {
-		if (value) {
+		if (Array.isArray(value)) {
+			searchParams.delete(key);
+
+			value.forEach((val) => {
+				if (val) {
+					searchParams.append(key, val);
+				}
+			});
+		} else if (value) {
 			searchParams.set(key, value);
 		}
 	});
@@ -10,6 +18,6 @@ export const getQueryParams = (params: Record<string, string>)=> {
 	return `?${searchParams.toString()}`;
 };
 
-export const addQueryParams = (params: Record<string, string>)=> {
+export const addQueryParams = (params: Record<string, string | string[]>)=> {
 	window.history.pushState(null, '', getQueryParams(params));
 };

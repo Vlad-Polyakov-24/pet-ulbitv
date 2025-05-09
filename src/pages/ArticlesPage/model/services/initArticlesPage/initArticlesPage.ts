@@ -16,8 +16,10 @@ export const initArticlesPage = createAsyncThunk<void, URLSearchParams, ThunkCon
 			order: searchParams.get('order') as SortOrder,
 			sort: searchParams.get('sort') as ArticleSortField,
 			search: searchParams.get('search'),
-			type: searchParams.get('type') as ArticleType,
+			type: searchParams.getAll('type') as ArticleType[],
 		};
+
+		const types = queryParams.type.length > 0 ? queryParams.type : [ArticleType.ALL];
 
 		if (queryParams.order) {
 			dispatch(articlesPageActions.setOrder(queryParams.order));
@@ -28,8 +30,8 @@ export const initArticlesPage = createAsyncThunk<void, URLSearchParams, ThunkCon
 		if (queryParams.search) {
 			dispatch(articlesPageActions.setSearch(queryParams.search));
 		}
-		if (queryParams.type) {
-			dispatch(articlesPageActions.setType(queryParams.type));
+		if (types) {
+			dispatch(articlesPageActions.setType(types));
 		}
 
 		dispatch(articlesPageActions.initState());

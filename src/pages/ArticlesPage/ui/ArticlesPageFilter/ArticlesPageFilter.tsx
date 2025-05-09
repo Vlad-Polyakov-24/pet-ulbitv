@@ -9,13 +9,12 @@ import {
 	getArticlesPageOrder,
 	getArticlesPageSearch,
 	getArticlesPageSort,
-	getArticlesPageType,
+	getArticlesPageTypes,
 	getArticlesPageView,
 } from '../../model/selectors/articlesPageSelectors';
 import { articlesPageActions } from '../../model/slices/articlesPageSlice';
 import { ArticleType, ArticleView } from '@entities/Article';
 import type { SortOrder } from '@shared/types/globals.types';
-import type { ITab } from '@features/Tabs';
 
 type ArticlesPageFilterProps = {
 	className?: string;
@@ -27,7 +26,7 @@ const ArticlesPageFilter = memo(({ className }: ArticlesPageFilterProps) => {
 	const sort = useSelector(getArticlesPageSort);
 	const order = useSelector(getArticlesPageOrder);
 	const search = useSelector(getArticlesPageSearch);
-	const type = useSelector(getArticlesPageType);
+	const types = useSelector(getArticlesPageTypes);
 
 	const fetchData = useCallback(() => {
 		dispatch(fetchArticlesList({ replace: true }));
@@ -57,8 +56,8 @@ const ArticlesPageFilter = memo(({ className }: ArticlesPageFilterProps) => {
 		debouncedFetchData();
 	}, [debouncedFetchData, dispatch]);
 
-	const handleChangeType = useCallback((tab: ITab) => {
-		dispatch(articlesPageActions.setType(tab.value as ArticleType));
+	const handleChangeType = useCallback((types: ArticleType[]) => {
+		dispatch(articlesPageActions.setType(types));
 		dispatch(articlesPageActions.setPage(1));
 		fetchData();
 	}, [dispatch, fetchData]);
@@ -70,7 +69,7 @@ const ArticlesPageFilter = memo(({ className }: ArticlesPageFilterProps) => {
 			sort={sort}
 			order={order}
 			search={search}
-			type={type}
+			types={types}
 			handleChangeView={handleChangeView}
 			handleChangeOrder={handleChangeOrder}
 			handleChangeSort={handleChangeSort}

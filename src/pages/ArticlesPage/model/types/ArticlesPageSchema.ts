@@ -13,6 +13,6 @@ export interface IArticlesPageSchema extends EntityState<IArticle, string>{
 	order: SortOrder;
 	sort: ArticleSortField;
 	search: string;
-	type: ArticleType;
+	types: ArticleType[];
 	_inited: boolean;
 }

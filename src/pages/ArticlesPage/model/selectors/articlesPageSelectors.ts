@@ -1,6 +1,9 @@
+import { createSelector } from '@reduxjs/toolkit';
 import type { StoreProviderSchema } from '@app/providers/StoreProvider';
 import { ArticleType, ArticleView } from '@entities/Article';
 import { ArticleSortField } from '@widgets/ArticlesFilters';
+
+const defaultTypesMemoized: ArticleType[] = [ArticleType.ALL];
 
 export const getArticlesPageView = (state: StoreProviderSchema) => state.articlesPage?.view || ArticleView.GRID;
 export const getArticlesPageIsLoading = (state: StoreProviderSchema) => state.articlesPage?.isLoading || false;
@@ -12,4 +15,7 @@ export const getArticlesPageInited = (state: StoreProviderSchema) => state.artic
 export const getArticlesPageOrder = (state: StoreProviderSchema) => state.articlesPage?.order ?? 'asc';
 export const getArticlesPageSort = (state: StoreProviderSchema) => state.articlesPage?.sort ?? ArticleSortField.CREATED;
 export const getArticlesPageSearch = (state: StoreProviderSchema) => state.articlesPage?.search ?? '';
-export const getArticlesPageType = (state: StoreProviderSchema) => state.articlesPage?.type ?? ArticleType.ALL;
+export const getArticlesPageTypes: (state: StoreProviderSchema) => ArticleType[] = createSelector(
+	(state) => state.articlesPage?.types,
+	(types) => types ?? defaultTypesMemoized
+);

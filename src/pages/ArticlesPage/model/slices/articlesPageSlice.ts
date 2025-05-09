@@ -33,7 +33,7 @@ const articlesPageSlice = createSlice({
 		order: 'asc',
 		search: '',
 		limit: 9,
-		type: ArticleType.ALL,
+		types: [ArticleType.ALL],
 	}),
 	reducers: {
 		setView: (state, action: PayloadAction<ArticleView>) => {
@@ -54,8 +54,8 @@ const articlesPageSlice = createSlice({
 		setSort: (state, action: PayloadAction<ArticleSortField>) => {
 			state.sort = action.payload;
 		},
-		setType: (state, action: PayloadAction<ArticleType>) => {
-			state.type  = action.payload;
+		setType: (state, action: PayloadAction<ArticleType[]>) => {
+			state.types = action.payload;
 		},
 		initState: (state) => {
 			const view = getStorage(localStorageKeys.ARTICLES_VIEW) as ArticleView || ArticleView.GRID;
