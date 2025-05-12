@@ -7,7 +7,7 @@ import type { IScrollRestorationSchema } from '@features/ScrollRestoration';
 import type { ILoginSchema } from '@features/AuthByUsername';
 import type { IProfileSchema } from '@entities/Profile';
 import type { IArticleSchema } from '@entities/Article';
-import type { IArticleCommentsSchema } from '@pages/ArticlePage';
+import type { IArticlePageSchema } from '@pages/ArticlePage';
 import type { IAddCommentSchema } from '@features/AddComment';
 import type { IArticlesPageSchema } from '@pages/ArticlesPage';
 
@@ -17,7 +17,7 @@ export interface StoreProviderSchema {
 	login?: ILoginSchema;
 	profile?: IProfileSchema;
 	article?: IArticleSchema;
-	articleComments?: IArticleCommentsSchema;
+	articlePage?: IArticlePageSchema;
 	addComment?: IAddCommentSchema;
 	articlesPage?: IArticlesPageSchema;
 }

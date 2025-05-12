@@ -9,13 +9,17 @@ import { Section } from '@widgets/Section';
 import { Container } from '@shared/ui/Container';
 import { Text, TextAlign, TextSize } from '@shared/ui/Text';
 import { Button, ButtonTheme } from '@shared/ui/Button';
-import { Article } from '@entities/Article';
+import { Article, ArticleList } from '@entities/Article';
 import { CommentList } from '@entities/Comment';
 import { AddCommentForm } from '@features/AddComment';
-import { articleCommentsSliceReducer, getArticleComments } from '../../model/slices/articleCommentsSlice';
+import { getArticleComments } from '../../model/slices/articleCommentsSlice';
+import { getArticleRecommendations } from '../../model/slices/articleRecommendationsSlice';
+import { articlePageReducer } from '../../model/slices/articlePageReducer';
 import { getArticleCommentsIsLoading } from '../../model/selectors/articleComments';
+import { getArticleRecommendationsIsLoading } from '../../model/selectors/articleRecommendations';
 import { fetchCommentsByArticleId } from '../../model/services/fetchCommentsByArticleId/fetchCommentsByArticleId';
 import { addCommentForArticle } from '../../model/services/addCommentForArticle/addCommentForArticle';
+import { fetchRecommendations } from '../../model/services/fetchRecommendations/fetchRecommendations';
 import { RoutePath } from '@app/providers/AppRouter';
 import cls from './ArticlePage.module.scss';
 
@@ -24,7 +28,7 @@ type ArticlePageProps = {
 };
 
 const reducers: ReducersList = {
-	articleComments: articleCommentsSliceReducer,
+	articlePage: articlePageReducer,
 };
 
 const ArticlePage = ({ className }: ArticlePageProps) => {
@@ -35,10 +39,13 @@ const ArticlePage = ({ className }: ArticlePageProps) => {
 	const { id } = useParams<{ id: string }>();
 	const dispatch = useAppDispatch();
 	const comments = useSelector(getArticleComments.selectAll);
+	const recommendations = useSelector(getArticleRecommendations.selectAll);
 	const commentsIsLoading = useSelector(getArticleCommentsIsLoading);
+	const recommendationsIsLoading = useSelector(getArticleRecommendationsIsLoading);
 
 	useEffect(() => {
 		dispatch(fetchCommentsByArticleId(id));
+		dispatch(fetchRecommendations());
 	}, [dispatch, id]);
 
 	const handleSendComment = useCallback((comment: string) => {
@@ -59,6 +66,8 @@ const ArticlePage = ({ className }: ArticlePageProps) => {
 								{tArticle('back to list')}
 							</Button>
 							<Article id={id} />
+							<Text title={tArticle('recommendations')} size={TextSize.XL} />
+							<ArticleList articles={recommendations} isLoading={recommendationsIsLoading} />
 							<Text title={tComments('comments')} size={TextSize.XL} />
 							<AddCommentForm handleSendComment={handleSendComment} />
 							<CommentList isLoading={commentsIsLoading} comments={comments} />

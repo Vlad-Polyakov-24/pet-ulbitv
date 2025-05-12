@@ -1,8 +1,6 @@
-import { memo, useCallback } from 'react';
-import { useNavigate } from 'react-router';
+import { memo } from 'react';
 import { ItemGrid } from './ItemGrid';
 import { ItemSingle } from './ItemSingle';
-import { RoutePath } from '@app/providers/AppRouter';
 import { ArticleView, type IArticle } from '../../model/types/Article.types';
 import cls from './ArticleListItem.module.scss';
 
@@ -14,18 +12,13 @@ type ArticleListItemProps = {
 
 const ArticleListItem = memo((props: ArticleListItemProps) => {
 	const { className, article, view } = props;
-	const navigate = useNavigate();
-
-	const handleOpenArticle = useCallback(() => {
-		navigate(`${RoutePath.article}${article.id}`);
-	}, [article.id, navigate]);
 
 	const content = {
 		[ArticleView.GRID]: () => (
-			<ItemGrid className={className} article={article} handleOpenArticle={handleOpenArticle} />
+			<ItemGrid className={className} article={article} />
 		),
 		[ArticleView.SINGLE]: () => (
-			<ItemSingle className={className} article={article} handleOpenArticle={handleOpenArticle} />
+			<ItemSingle className={className} article={article} />
 		),
 	};
 

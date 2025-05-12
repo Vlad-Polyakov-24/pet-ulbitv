@@ -26,7 +26,7 @@ const Card = <T extends ElementType = 'div'>(props: CardProps<T>) => {
 		radius = CardRadius.R_0,
 	} = visual || {};
 	const Component = as || 'div';
-	const additional: Additional = [className, cls[theme], cls[padding], cls[background], cls[radius]];
+	const additional: Additional = [cls[theme], cls[padding], cls[background], cls[radius], className];
 
 	return (
 		<Component className={classNames(cls.card, {}, additional)} {...rest}>{children}</Component>

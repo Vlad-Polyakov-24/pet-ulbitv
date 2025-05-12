@@ -1,4 +1,5 @@
 import { memo } from 'react';
+import { Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { classNames } from '@shared/lib/classNames';
 import { Avatar } from '@shared/ui/Avatar';
@@ -7,6 +8,7 @@ import { Card } from '@shared/ui/Card';
 import { Image } from '@shared/ui/Image';
 import { Button, ButtonTheme } from '@shared/ui/Button';
 import { Icon, IconSize } from '@shared/ui/Icon';
+import { RoutePath } from '@app/providers/AppRouter';
 import { ArticleBlockType, type IArticle } from '../../model/types/Article.types';
 import cls from './ArticleListItem.module.scss';
 import EyeIcon from '@shared/assets/icons/eye.svg';
@@ -14,12 +16,11 @@ import EyeIcon from '@shared/assets/icons/eye.svg';
 type ItemSingleProps = {
 	className?: string;
 	article: IArticle;
-	handleOpenArticle?: () => void;
 };
 
 const ItemSingle = memo((props: ItemSingleProps) => {
-	const { className, article, handleOpenArticle } = props;
-	const { user: { avatar, username }, createdAt, title, type, img, views, blocks } = article;
+	const { className, article } = props;
+	const { user: { avatar, username }, createdAt, title, type, img, views, blocks, id } = article;
 	const { t: tArticle } = useTranslation('article');
 	const textParagraph = blocks
 		.find((block) => block.type === ArticleBlockType.TEXT)?.paragraphs[0];
@@ -46,7 +47,7 @@ const ItemSingle = memo((props: ItemSingleProps) => {
 				)}
 			</div>
 			<footer className={classNames(cls.card__row, {}, [cls.footer, cls.spaceBetween])}>
-				<Button theme={ButtonTheme.OUTLINE} onClick={handleOpenArticle}>
+				<Button as={Link} to={`${RoutePath.article}${id}`} theme={ButtonTheme.OUTLINE}>
 					{tArticle('read more')}
 				</Button>
 				<div className={cls.card__views}>

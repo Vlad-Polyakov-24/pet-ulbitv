@@ -15,7 +15,7 @@ type ArticleListProps = {
 };
 
 const ArticleList = memo((props: ArticleListProps) => {
-	const { className, articles, isLoading, view = ArticleView.SINGLE } = props;
+	const { className, articles, isLoading, view = ArticleView.GRID } = props;
 	const { t: tArticles } = useTranslation('articles');
 
 	const skeletons = new Array(view === ArticleView.GRID ? 9 : 3).fill(0).map((_, i) => (

@@ -1,9 +1,11 @@
 import { memo } from 'react';
+import { Link } from 'react-router';
 import { classNames } from '@shared/lib/classNames';
 import { Text } from '@shared/ui/Text';
 import { Image } from '@shared/ui/Image';
 import { Icon, IconSize } from '@shared/ui/Icon';
 import { Card } from '@shared/ui/Card';
+import { RoutePath } from '@app/providers/AppRouter';
 import type { IArticle } from '@entities/Article';
 import cls from './ArticleListItem.module.scss';
 import EyeIcon from '@shared/assets/icons/eye.svg';
@@ -11,15 +13,14 @@ import EyeIcon from '@shared/assets/icons/eye.svg';
 type ItemGridProps = {
 	className?: string;
 	article: IArticle;
-	handleOpenArticle?: () => void;
 };
 
 const ItemGrid = memo((props: ItemGridProps) => {
-	const { className, article, handleOpenArticle } = props;
-	const { createdAt, img, title, type, views } = article;
+	const { className, article } = props;
+	const { createdAt, img, title, type, views, id } = article;
 
 	return (
-		<Card className={classNames(cls.card, {}, [className])} onClick={handleOpenArticle}>
+		<Card as={Link} to={`${RoutePath.article}${id}`} className={classNames(cls.card, {}, [className])}>
 			<Text text={createdAt} className={cls.card__date} />
 			<Image src={img} alt={title} height={200} />
 			<div className={cls.card__body}>

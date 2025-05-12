@@ -1,3 +1,3 @@
 export { ArticlePage } from './ui/ArticlePage/ArticlePage.async';
 
-export type { IArticleCommentsSchema } from './model/types/ArticleCommentsSchema';
+export type { IArticlePageSchema } from './model/types/ArticlePageSchema.types';

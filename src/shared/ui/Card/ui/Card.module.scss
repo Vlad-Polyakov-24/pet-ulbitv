@@ -9,9 +9,7 @@
 	&.theme-default {
 		// background
 
-		&.bg-clear {
-			background-color: transparent;
-		}
+		&.bg-clear {}
 		&.bg-primary {
 			background-color: var(--bg-color);
 			color: var(--inverted-primary-color);
@@ -32,9 +30,7 @@
 
 		// border color
 
-		&.bg-clear {
-			border-color: transparent;
-		}
+		&.bg-clear {}
 		&.bg-primary {
 			border-color: var(--bg-color);
 		}
