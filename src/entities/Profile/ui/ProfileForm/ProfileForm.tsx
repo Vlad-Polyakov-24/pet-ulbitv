@@ -1,12 +1,11 @@
 import { memo, Fragment, type FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
-import { classNames } from '@shared/lib/classNames';
 import { Input } from '@shared/ui/Input';
+import { HStack, VStack } from '@shared/ui/Stack';
 import { CurrencySelect } from '@entities/Currency';
 import { CountrySelect } from '@entities/Country';
 import { inputs } from '../../model/data/profileForm.data';
 import type { IProfile, ValidateProfileErrorsMap } from '../../model/types/Profile.types';
-import cls from './ProfileForm.module.scss';
 
 type ProfileFormProps = {
 	className?: string;
@@ -27,7 +26,7 @@ const ProfileForm = memo((props: ProfileFormProps) => {
 	};
 
 	return (
-		<form className={classNames(cls.form, {}, [className])} onSubmit={onSubmit}>
+		<VStack as={'form'} gap={'10'} className={className} onSubmit={onSubmit} fluid>
 			{inputs.column.map(({ name }) => (
 				<Input
 					key={name}
@@ -39,7 +38,7 @@ const ProfileForm = memo((props: ProfileFormProps) => {
 					error={validateErrors?.[name]?.[0]}
 				/>
 			))}
-			<div className={cls.form__row}>
+			<HStack align={'center'} gap={'10'} fluid>
 				{inputs.row.map(({ name }) => (
 					<Fragment key={name}>
 						{name === 'country' && (
@@ -62,8 +61,8 @@ const ProfileForm = memo((props: ProfileFormProps) => {
 						)}
 					</Fragment>
 				))}
-			</div>
-		</form>
+			</HStack>
+		</VStack>
 	);
 });
 

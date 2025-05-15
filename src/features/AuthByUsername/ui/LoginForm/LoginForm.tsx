@@ -10,6 +10,7 @@ import { Input } from '@shared/ui/Input';
 import { Button, ButtonTheme } from '@shared/ui/Button';
 import { Text, TextColor } from '@shared/ui/Text';
 import { Loader, LoaderTheme } from '@shared/ui/Loader';
+import { VStack } from '@shared/ui/Stack';
 import { loginActions, loginReducer } from '../../model/slice/loginSlice';
 import { getLoginInputs } from '../../model/data/form.data';
 import { ILoginInputs } from '../../model/types/LoginForm.types';
@@ -60,7 +61,9 @@ const LoginForm = ({ className, closeModal }: LoginFormProps) =>  {
 
 	return (
 		<DynamicModuleLoader reducers={initialReducer}>
-			<form
+			<VStack
+				as={'form'}
+				gap={'10'}
 				className={classNames(cls.form, {}, [className])}
 				onSubmit={(e) => handleSubmit(e)}
 			>
@@ -85,7 +88,7 @@ const LoginForm = ({ className, closeModal }: LoginFormProps) =>  {
 					{tAuth('login')}
 				</Button>
 				{isLoading && <Loader theme={LoaderTheme.OVERLAY} />}
-			</form>
+			</VStack>
 		</DynamicModuleLoader>
 	);
 };

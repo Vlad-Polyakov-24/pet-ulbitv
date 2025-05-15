@@ -1,34 +1,6 @@
 .grid, .single {
 	&.card {
 		background-color: var(--article-card-bg);
-
-		.card__row {
-			display: flex;
-			align-items: center;
-			gap: 10px;
-
-			&.space-between {
-				justify-content: space-between;
-			}
-		}
-
-		.card__body {
-			display: flex;
-			flex-direction: column;
-			gap: 10px;
-
-			&-inner {
-				padding-left: 20px;
-				padding-right: 20px;
-			}
-		}
-
-		.card__views {
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			gap: 5px;
-		}
 	}
 }
 
@@ -66,7 +38,8 @@
 			text-overflow: ellipsis;
 		}
 
-		.card__body {
+		.card__row {
+			width: 100%;
 			padding-left: 10px;
 			padding-right: 10px;
 		}
@@ -75,17 +48,22 @@
 
 .single {
 	&.card {
+		.card__header {
+			padding-top: 20px;
+			padding-left: 20px;
+			padding-right: 20px;
+		}
+
+		.card__footer {
+			padding-left: 20px;
+			padding-right: 20px;
+			padding-bottom: 20px;
+		}
+
 		.card__row {
-			&.header {
-				padding-top: 20px;
-				padding-left: 20px;
-				padding-right: 20px;
-			}
-			&.footer {
-				padding-left: 20px;
-				padding-right: 20px;
-				padding-bottom: 20px;
-			}
+			width: 100%;
+			padding-left: 20px;
+			padding-right: 20px;
 		}
 
 		.card__paragraph {

@@ -1,8 +1,7 @@
 import { memo } from 'react';
-import { classNames } from '@shared/lib/classNames';
 import { Text } from '@shared/ui/Text';
+import { VStack } from '@shared/ui/Stack';
 import type { IArticleBlockText } from '../../model/types/Article.types';
-import cls from './ArticleBlockText.module.scss';
 
 type ArticleBlockTextProps = {
 	className?: string;
@@ -13,10 +12,10 @@ const ArticleBlockText = memo(({ className, block }: ArticleBlockTextProps) => {
 	const { title, paragraphs } = block;
 
 	return (
-		<div className={classNames(cls.block, {}, [className])}>
+		<VStack gap={'14'} className={className}>
 			{title && <Text title={title} />}
 			{paragraphs.map((p, i) => <Text key={i} text={p} />)}
-		</div>
+		</VStack>
 	);
 });
 

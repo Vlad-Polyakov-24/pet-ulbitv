@@ -59,7 +59,7 @@ const ArticlePage = ({ className }: ArticlePageProps) => {
 							<ArticlePageHeader id={id} />
 							<Article id={id} />
 							<Text title={tArticle('recommendations')} size={TextSize.XL} />
-							<ArticleList articles={recommendations} isLoading={recommendationsIsLoading} />
+							<ArticleList articles={recommendations} isLoading={recommendationsIsLoading} virtualized={false} />
 							<Text title={tComments('comments')} size={TextSize.XL} />
 							<AddCommentForm handleSendComment={handleSendComment} />
 							<CommentList isLoading={commentsIsLoading} comments={comments} />

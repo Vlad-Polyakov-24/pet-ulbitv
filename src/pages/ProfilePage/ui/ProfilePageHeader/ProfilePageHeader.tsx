@@ -1,13 +1,12 @@
 import { memo, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { classNames } from '@shared/lib/classNames';
 import { useAppDispatch } from '@app/providers/StoreProvider';
 import { Text } from '@shared/ui/Text';
 import { Button, ButtonTheme } from '@shared/ui/Button';
+import { HStack } from '@shared/ui/Stack';
 import { getProfileData, profileActions } from '@entities/Profile';
 import { getAuthData } from '@entities/User';
-import cls from './ProfilePageHeader.module.scss';
 
 type ProfilePageHeaderProps = {
 	className?: string;
@@ -33,9 +32,9 @@ const ProfilePageHeader = memo((props: ProfilePageHeaderProps) => {
 	}, [dispatch]);
 
 	return (
-		<div className={classNames(cls.header, {}, [className])}>
+		<HStack justify={'between'} align={'center'} gap={'20'} className={className}>
 			<Text title={tProfile('profile')} />
-			<div className={cls.header__buttons}>
+			<HStack align={'center'} gap={'10'}>
 				{canEdit && (
 					<>
 						{readonly
@@ -64,8 +63,8 @@ const ProfilePageHeader = memo((props: ProfilePageHeaderProps) => {
 							)}
 					</>
 				)}
-			</div>
-		</div>
+			</HStack>
+		</HStack>
 	);
 });
 

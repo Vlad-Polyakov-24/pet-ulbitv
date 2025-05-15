@@ -11,6 +11,7 @@ type ArticleListProps = {
 	isLoading?: boolean;
 	view?: ArticleView;
 	wrapperRef?: RefObject<HTMLDivElement | null>;
+	virtualized?: boolean;
 };
 
 const ArticleList = memo(({ view = ArticleView.GRID, ...rest }: ArticleListProps) => {

@@ -1,6 +1,7 @@
 import { memo, useCallback } from 'react';
 import { classNames } from '@shared/lib/classNames';
 import { Card, CardBackground, CardPadding, CardRadius, CardTheme } from '@shared/ui/Card';
+import { HStack } from '@shared/ui/Stack';
 import type { ITab } from '../model/types/Tabs.types';
 import cls from './Tabs.module.scss';
 
@@ -19,7 +20,7 @@ const Tabs = memo((props: TabsProps) => {
 	}, [onTabClick]);
 
 	return (
-		<ul className={classNames(cls.tabs, {}, [className])}>
+		<HStack as={'ul'} gap={'8'} className={classNames(cls.tabs, {}, [className])}>
 			{tabs.map((tab) => (
 				<Card
 					key={tab.value}
@@ -31,12 +32,12 @@ const Tabs = memo((props: TabsProps) => {
 						background: CardBackground.PRIMARY_INVERTED,
 						radius: CardRadius.R_10,
 					}}
-					className={cls.tabs__item}
+					className={cls.card}
 				>
 					{tab.content}
 				</Card>
 			))}
-		</ul>
+		</HStack>
 	);
 });
 

@@ -5,6 +5,7 @@ import { Text } from '@shared/ui/Text';
 import { Image } from '@shared/ui/Image';
 import { Icon, IconSize } from '@shared/ui/Icon';
 import { Card } from '@shared/ui/Card';
+import { HStack } from '@shared/ui/Stack';
 import { RoutePath } from '@app/providers/AppRouter';
 import type { IArticle } from '@entities/Article';
 import cls from './ArticleListItem.module.scss';
@@ -23,14 +24,14 @@ const ItemGrid = memo((props: ItemGridProps) => {
 		<Card as={Link} to={`${RoutePath.article}${id}`} className={classNames(cls.card, {}, [className])}>
 			<Text text={createdAt} className={cls.card__date} />
 			<Image src={img} alt={title} height={200} />
-			<div className={cls.card__body}>
-				<div className={classNames(cls.card__row, {}, [cls.spaceBetween])}>
+			<div className={cls.card__row}>
+				<HStack gap={'10'} justify={'between'}>
 					<Text text={type.join(', ')} textClassName={cls.card__types} />
-					<div className={cls.card__views}>
+					<HStack align={'center'} justify={'between'} gap={'6'}>
 						<Text text={String(views)} />
 						<Icon icon={<EyeIcon />} size={IconSize.SIZE_14} />
-					</div>
-				</div>
+					</HStack>
+				</HStack>
 				<Text title={title} titleClassName={cls.card__title} />
 			</div>
 		</Card>

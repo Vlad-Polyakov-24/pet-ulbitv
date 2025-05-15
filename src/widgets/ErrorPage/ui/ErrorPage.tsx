@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { classNames } from '@shared/lib/classNames';
 import { Button } from '@shared/ui/Button';
+import { VStack } from '@shared/ui/Stack';
 import cls from './ErrorPage.module.scss';
 
 interface ErrorPageProps {
@@ -15,12 +16,16 @@ const ErrorPage = ({ className }: ErrorPageProps) => {
 	};
 
 	return (
-		<div className={classNames(cls.errorPage, {}, [className])}>
+		<VStack
+			className={classNames(cls.errorPage, {}, [className])}
+			align={'center'}
+			justify={'center'}
+		>
 			<p>{t('an unexpected error has occurred')}</p>
 			<Button onClick={reloadPage}>
 				{t('reload page')}
 			</Button>
-		</div>
+		</VStack>
 	);
 };
 

@@ -1,15 +1,10 @@
-.tabs {
-	display: flex;
-	gap: 8px;
+.card {
+	cursor: pointer;
+	transition: var(--primary-transition);
 
-	&__item {
-		cursor: pointer;
-		transition: var(--primary-transition);
-
-		@media (hover: hover) {
-			&:hover {
-				scale: 1.1;
-			}
+	@media (hover: hover) {
+		&:hover {
+			scale: 1.1;
 		}
 	}
 }

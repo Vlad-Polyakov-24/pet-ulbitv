@@ -1,13 +1,12 @@
 import { memo } from 'react';
-import { classNames } from '@shared/lib/classNames';
 import { Avatar } from '@shared/ui/Avatar';
 import { Text, TextSize } from '@shared/ui/Text';
 import { Icon } from '@shared/ui/Icon';
+import { HStack, VStack } from '@shared/ui/Stack';
 import { ArticleBlockText } from '../ArticleBlockText/ArticleBlockText';
 import { ArticleBlockCode } from '../ArticleBlockCode/ArticleBlockCode';
 import { ArticleBlockImage } from '../ArticleBlockImage/ArticleBlockImage';
 import { ArticleBlockType, type IArticle, type IArticleBlock } from '../../model/types/Article.types';
-import cls from './ArticleContent.module.scss';
 import EyeIcon from '@shared/assets/icons/eye.svg';
 import CalendarIcon from '@shared/assets/icons/calendar.svg';
 
@@ -33,21 +32,21 @@ const ArticleContent = memo(({ className, article }: ArticleContentProps) => {
 	};
 
 	return (
-		<div className={classNames(cls.content, {}, [className])}>
+		<VStack gap={'20'} className={className}>
 			<Avatar size={200} src={img} alt={title} className={'m-centred'} />
 			<Text size={{ text: TextSize.L, title: TextSize.XL }} title={title} text={subtitle} />
-			<div className={cls.content__row} style={{ gap: 20 }}>
-				<div className={cls.content__row}>
+			<HStack gap={'20'} align={'center'}>
+				<HStack gap={'6'} align={'center'}>
 					<Icon icon={<EyeIcon />} />
 					<Text text={String(views)} />
-				</div>
-				<div className={cls.content__row}>
+				</HStack>
+				<HStack gap={'6'} align={'center'}>
 					<Icon icon={<CalendarIcon />} />
 					<Text text={createdAt} />
-				</div>
-			</div>
+				</HStack>
+			</HStack>
 			{blocks.map(renderBlock)}
-		</div>
+		</VStack>
 	);
 });
 

@@ -1,8 +1,8 @@
 import { memo, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { classNames } from '@shared/lib/classNames';
 import { generateSortOptions } from '../../model/data/articlesSort.data';
 import { Select, type ISelectOptions } from '@shared/ui/Select';
+import { HStack } from '@shared/ui/Stack';
 import type { SortOrder } from '@shared/types/globals.types';
 import { ArticleSortField } from '../../model/types/ArticlesFilters.types';
 import cls from './ArticlesSort.module.scss';
@@ -34,9 +34,9 @@ const ArticlesSort = memo((props: ArticlesSortProps) => {
 	);
 
 	return (
-		<div className={classNames(cls.sort, {}, [className])}>
+		<HStack className={className} align={'center'} gap={'10'} grow>
 			<Select
-				className={cls.sort__field}
+				className={cls.sort}
 				options={sortOptions}
 				label={tFields('sortBy')}
 				orientation={'horizontal'}
@@ -44,14 +44,14 @@ const ArticlesSort = memo((props: ArticlesSortProps) => {
 				onChange={handleChangeSort}
 			/>
 			<Select
-				className={cls.sort__order}
+				className={cls.order}
 				options={orderOptions}
 				label={tFields('by')}
 				orientation={'horizontal'}
 				value={order}
 				onChange={handleChangeOrder}
 			/>
-		</div>
+		</HStack>
 	);
 });
 

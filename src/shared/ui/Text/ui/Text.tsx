@@ -1,5 +1,6 @@
 import { memo, type CSSProperties } from 'react';
 import { classNames, type Additional } from '@shared/lib/classNames';
+import { VStack } from '@shared/ui/Stack';
 import { getColorClass, TextColorProps } from '../lib/getColorClass';
 import { getSizeClass, TextSizeProps } from '../lib/getSizeClass';
 import { getAlignClass, TextAlignProps } from '../lib/getAlignClass';
@@ -35,10 +36,10 @@ const Text = memo((props: TextProps) => {
 	if (!title && !text) return null;
 
 	return (
-		<div className={classNames(cls.text, {}, [className])} style={styles}>
-			{title && <p className={classNames(cls.text__title, {}, titleAdditional)}>{title}</p>}
-			{text && <p className={classNames(cls.text__text, {}, textAdditional)}>{text}</p>}
-		</div>
+		<VStack gap={'6'} className={className} style={styles}>
+			{title && <p className={classNames('', {}, titleAdditional)}>{title}</p>}
+			{text && <p className={classNames('', {}, textAdditional)}>{text}</p>}
+		</VStack>
 	);
 });
 

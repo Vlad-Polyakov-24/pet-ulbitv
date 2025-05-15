@@ -5,6 +5,7 @@ import { Text, TextAlign, TextColor } from '@shared/ui/Text';
 import { Loader } from '@shared/ui/Loader';
 import { Avatar } from '@shared/ui/Avatar';
 import { ErrorMessage } from '@shared/ui/ErrorMessage';
+import { VStack } from '@shared/ui/Stack';
 import { ProfileForm } from '../ProfileForm/ProfileForm';
 import type { IProfile, ValidateProfileErrorsMap } from '../../model/types/Profile.types';
 import cls from './ProfileCard.module.scss';
@@ -53,9 +54,9 @@ const ProfileCard = memo((props: ProfileCardProps) => {
 	}
 
 	return (
-		<div className={classNames(cls.card, { [cls.edit]: !readonly }, [className])}>
+		<VStack gap={'20'} className={classNames(cls.card, { [cls.edit]: !readonly }, [className])}>
 			{content}
-		</div>
+		</VStack>
 	);
 });
 

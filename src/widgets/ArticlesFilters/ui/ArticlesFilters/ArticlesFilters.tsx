@@ -1,9 +1,9 @@
 import { memo, useMemo } from 'react';
 import { Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
-import { classNames } from '@shared/lib/classNames';
 import { Input } from '@shared/ui/Input';
 import { Button, ButtonTheme } from '@shared/ui/Button';
+import { HStack, VStack } from '@shared/ui/Stack';
 import { ViewSwitcher } from '@features/ViewSwitcher';
 import { ArticlesTabs } from '../ArticlesTabs/ArticlesTabs';
 import { ArticlesSort } from '../ArticlesSort/ArticlesSort';
@@ -12,7 +12,6 @@ import { RoutePath } from '@app/providers/AppRouter';
 import { ArticleType, ArticleView } from '@entities/Article';
 import { ArticleSortField } from '@widgets/ArticlesFilters';
 import type { SortOrder } from '@shared/types/globals.types';
-import cls from './ArticlesFilters.module.scss';
 
 type ArticlesFiltersProps = {
 	className?: string;
@@ -49,8 +48,8 @@ const ArticlesFilters = memo((props: ArticlesFiltersProps) => {
 	const tabs = useMemo(() => generateTabsData(tArticles), [tArticles]);
 
 	return (
-		<div className={classNames(cls.filter, {}, [className])}>
-			<div className={cls.filter__row}>
+		<VStack gap={'10'} className={className}>
+			<HStack align={'center'} gap={'20'} fluid>
 				<ArticlesSort
 					sort={sort}
 					order={order}
@@ -61,14 +60,14 @@ const ArticlesFilters = memo((props: ArticlesFiltersProps) => {
 					{tArticle('create article')}
 				</Button>
 				<ViewSwitcher currentView={view} onChange={handleChangeView} />
-			</div>
+			</HStack>
 			<Input value={search} onChange={handleChangeSearch} placeholder={tFields('search')} />
 			<ArticlesTabs
 				tabs={tabs}
 				currentTypes={types}
 				onTabClick={handleChangeType}
 			/>
-		</div>
+		</VStack>
 	);
 });
 

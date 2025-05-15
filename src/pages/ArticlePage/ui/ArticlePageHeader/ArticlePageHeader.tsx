@@ -2,11 +2,10 @@ import { memo } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
-import { classNames } from '@shared/lib/classNames';
 import { Button, ButtonTheme } from '@shared/ui/Button';
+import { HStack } from '@shared/ui/Stack';
 import { getCanEditArticle } from '../../model/selectors/article';
 import { RoutePath } from '@app/providers/AppRouter';
-import cls from './ArticlePageHeader.module.scss';
 
 type ArticlePageHeaderProps = {
 	className?: string;
@@ -19,7 +18,7 @@ const ArticlePageHeader = memo(({ className, id }: ArticlePageHeaderProps) => {
 	const canEdit = useSelector(getCanEditArticle);
 
 	return (
-		<div className={classNames(cls.header, {}, [className])}>
+		<HStack align={'center'} justify={'between'} gap={'20'} className={className}>
 			<Button as={Link} to={RoutePath.articles} theme={ButtonTheme.OUTLINE}>
 				{tArticle('back to list')}
 			</Button>
@@ -28,7 +27,7 @@ const ArticlePageHeader = memo(({ className, id }: ArticlePageHeaderProps) => {
 					{tDefault('edit')}
 				</Button>
 			)}
-		</div>
+		</HStack>
 	);
 });
 

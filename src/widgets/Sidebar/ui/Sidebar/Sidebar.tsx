@@ -1,9 +1,10 @@
-import { memo, useState } from 'react';
+import { memo, useCallback, useState } from 'react';
 import { classNames } from '@shared/lib/classNames';
 import { Nav } from '@features/Nav';
 import { ThemeSwitcher } from '@features/ThemeSwitcher';
 import { LangSwitcher } from '@features/LangSwitcher';
 import { Button, ButtonSize, ButtonTheme } from '@shared/ui/Button';
+import { Flex } from '@shared/ui/Stack';
 import cls from './Sidebar.module.scss';
 
 interface SidebarProps {
@@ -13,9 +14,9 @@ interface SidebarProps {
 const Sidebar = memo(({ className }: SidebarProps) => {
 	const [collapsed, setCollapsed] = useState(false);
 
-	const onToggle = () => {
+	const onToggle = useCallback(() => {
 		setCollapsed((prev) => !prev);
-	};
+	}, []);
 
 	return (
 		<aside className={classNames(cls.sidebar, { [cls.collapsed]: collapsed }, [className])}>
@@ -29,10 +30,16 @@ const Sidebar = memo(({ className }: SidebarProps) => {
 				{collapsed ? '>' : '<'}
 			</Button>
 			<Nav collapsed={collapsed} />
-			<div className={cls.sidebar__switchers}>
+			<Flex
+				className={'mt-a'}
+				direction={collapsed ? 'column' : 'row'}
+				align={collapsed ? 'center' : 'start'}
+				justify={'center'}
+				gap={'10'}
+			>
 				<ThemeSwitcher />
 				<LangSwitcher />
-			</div>
+			</Flex>
 		</aside>
 	);
 });

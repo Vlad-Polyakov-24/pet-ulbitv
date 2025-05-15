@@ -12,10 +12,11 @@ type ListGridProps = {
 	isLoading?: boolean;
 	view: ArticleView;
 	wrapperRef?: RefObject<HTMLDivElement | null>;
+	virtualized?: boolean;
 };
 
 const ListGrid = memo((props: ListGridProps) => {
-	const { className, articles, isLoading, view, wrapperRef } = props;
+	const { className, articles, isLoading, view, wrapperRef, virtualized = true } = props;
 	const [containerWidth, setContainerWidth] = useState(0);
 	const ulRef = useRef<HTMLUListElement>(null);
 	const skeletonCount = 12;
@@ -37,7 +38,7 @@ const ListGrid = memo((props: ListGridProps) => {
 	const rowCount = Math.ceil(totalCount / columnCount);
 
 	const rowVirtualizer = useVirtualizer({
-		count: rowCount,
+		count: virtualized ? rowCount : 0,
 		overscan: 5,
 		getScrollElement: () => wrapperRef?.current ?? null,
 		estimateSize: () => 280,
@@ -45,7 +46,7 @@ const ListGrid = memo((props: ListGridProps) => {
 
 	const columnVirtualizer = useVirtualizer({
 		horizontal: true,
-		count: columnCount,
+		count: virtualized ? columnCount : 0,
 		overscan: 5,
 		getScrollElement: () => wrapperRef?.current ?? null,
 		estimateSize: () => columnWidth,
@@ -68,6 +69,22 @@ const ListGrid = memo((props: ListGridProps) => {
 		rowVirtualizer.measure();
 		columnVirtualizer.measure();
 	}, [columnVirtualizer, containerWidth, rowVirtualizer]);
+
+	if (!virtualized) {
+		return (
+			<ul className={classNames(cls.articles__list, {}, [className])}>
+				{(isLoading ? new Array(4).fill(null) : articles).map((article, index) => (
+					<li key={article?.id ?? index}>
+						{article ? (
+							<ArticleListItem article={article} view={view} />
+						) : (
+							<ArticleListItemSkeleton view={view} />
+						)}
+					</li>
+				))}
+			</ul>
+		);
+	}
 
 	return (
 		<ul

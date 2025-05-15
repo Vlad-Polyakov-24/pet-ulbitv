@@ -1,6 +1,7 @@
 import { memo, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { classNames } from '@shared/lib/classNames';
+import { VStack } from '@shared/ui/Stack';
 import { getAuthData } from '@entities/User';
 import { NavItem } from '../NavItem/NavItem';
 import { getNavLinks } from '../../model/selectors/navSelectors';
@@ -22,9 +23,9 @@ const Nav = memo(({ className, collapsed }: NavProps) => {
 		[collapsed, isAuth, links]);
 
 	return (
-		<nav className={classNames(cls.nav, {}, [className])}>
+		<VStack as={'nav'} gap={'10'} className={classNames(cls.nav, {}, [className])}>
 			{...navLinks}
-		</nav>
+		</VStack>
 	);
 });
 

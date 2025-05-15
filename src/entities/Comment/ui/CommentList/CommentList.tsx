@@ -1,10 +1,9 @@
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { classNames } from '@shared/lib/classNames';
 import { Text } from '@shared/ui/Text';
+import { VStack } from '@shared/ui/Stack';
 import CommentItem from '../CommentItem/CommentItem';
 import type { IComment } from '../../model/types/Comment.types';
-import cls from './CommentList.module.scss';
 
 type CommentListProps = {
 	className?: string;
@@ -17,11 +16,11 @@ const CommentList = memo((props: CommentListProps) => {
 	const { t } = useTranslation('comments');
 
 	return (
-		<div className={classNames(cls.comments, {}, [className])}>
+		<div className={className}>
 			{comments && comments?.length > 0 ? (
-				<ul className={cls.comments__list}>
+				<VStack as={'ul'} gap={'6'}>
 					{comments?.map((c) => <CommentItem key={c.id} isLoading={isLoading} comment={c} />)}
-				</ul>
+				</VStack>
 			) : (
 				<Text title={t('comments not found')} />
 			)}

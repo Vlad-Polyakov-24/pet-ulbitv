@@ -4,6 +4,7 @@ import { Avatar } from '@shared/ui/Avatar';
 import { Text } from '@shared/ui/Text';
 import { Skeleton } from '@shared/ui/Skeleton';
 import { AppLink } from '@shared/ui/AppLink';
+import { HStack, VStack } from '@shared/ui/Stack';
 import { RoutePath } from '@app/providers/AppRouter';
 import type { IComment } from '../../model/types/Comment.types';
 import cls from './CommentItem.module.scss';
@@ -19,10 +20,10 @@ const CommentItem = memo((props: CommentItemProps) => {
 
 	const content = isLoading ? (
 		<>
-			<div className={cls.comment__header}>
+			<HStack align={'center'} gap={'10'}>
 				<Skeleton styles={{ width: 30, height: 30, borderRadius: '50%' }} />
 				<Skeleton styles={{ width: 100, height: 16 }} />
-			</div>
+			</HStack>
 			<Skeleton styles={{ width: '100%', height: 24 }} />
 		</>
 	) : (
@@ -36,9 +37,9 @@ const CommentItem = memo((props: CommentItemProps) => {
 	);
 
 	return (
-		<div className={classNames(cls.comment, {}, [className])}>
+		<VStack gap={'10'} className={classNames(cls.comment, {}, [className])}>
 			{content}
-		</div>
+		</VStack>
 	);
 });
 
