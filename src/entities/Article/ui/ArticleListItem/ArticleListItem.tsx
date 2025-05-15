@@ -1,4 +1,5 @@
 import { memo } from 'react';
+import { classNames } from '@shared/lib/classNames';
 import { ItemGrid } from './ItemGrid';
 import { ItemSingle } from './ItemSingle';
 import { ArticleView, type IArticle } from '../../model/types/Article.types';
@@ -15,14 +16,14 @@ const ArticleListItem = memo((props: ArticleListItemProps) => {
 
 	const content = {
 		[ArticleView.GRID]: () => (
-			<ItemGrid className={className} article={article} />
+			<ItemGrid className={classNames(cls[view], {}, [className])} article={article} />
 		),
 		[ArticleView.SINGLE]: () => (
-			<ItemSingle className={className} article={article} />
+			<ItemSingle className={classNames(cls[view], {}, [className])} article={article} />
 		),
 	};
 
-	return <li className={cls[view]}>{content[view]()}</li>;
+	return content[view]();
 });
 
 export { ArticleListItem };

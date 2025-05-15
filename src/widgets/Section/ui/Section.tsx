@@ -1,4 +1,4 @@
-import { useRef, useEffect, type ReactNode, type UIEvent } from 'react';
+import { useRef, useEffect, type ReactNode, type UIEvent, type RefObject } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router';
 import { classNames } from '@shared/lib/classNames';
@@ -13,12 +13,14 @@ type SectionProps = {
 	children: ReactNode;
 	onScrollEnd?: () => void;
 	restoreScroll?: boolean;
+	wrapperRef?: RefObject<HTMLDivElement | null>;
 };
 
 const Section = (props: SectionProps) => {
-	const { className, children, onScrollEnd, restoreScroll = false } = props;
+	const { className, children, onScrollEnd, restoreScroll = false, wrapperRef: externalWrapperRef } = props;
 	const { pathname } = useLocation();
-	const wrapperRef = useRef<HTMLDivElement>(null);
+	const internalWrapperRef = useRef<HTMLDivElement>(null);
+	const wrapperRef = externalWrapperRef ?? internalWrapperRef;
 	const triggerRef = useRef<HTMLDivElement>(null);
 	const dispatch = useAppDispatch();
 	const scrollPosition = useSelector(
@@ -35,7 +37,7 @@ const Section = (props: SectionProps) => {
 		if (restoreScroll && wrapperRef.current) {
 			wrapperRef.current.scrollTop = scrollPosition;
 		}
-	}, [restoreScroll, scrollPosition]);
+	}, [restoreScroll, scrollPosition, wrapperRef]);
 
 	const handleScroll = useThrottle((e: UIEvent<HTMLDivElement>) => {
 		dispatch(scrollRestorationActions.setScrollPosition({

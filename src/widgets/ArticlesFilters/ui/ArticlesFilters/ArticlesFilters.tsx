@@ -1,11 +1,14 @@
 import { memo, useMemo } from 'react';
+import { Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { classNames } from '@shared/lib/classNames';
 import { Input } from '@shared/ui/Input';
+import { Button, ButtonTheme } from '@shared/ui/Button';
 import { ViewSwitcher } from '@features/ViewSwitcher';
 import { ArticlesTabs } from '../ArticlesTabs/ArticlesTabs';
 import { ArticlesSort } from '../ArticlesSort/ArticlesSort';
 import { generateTabsData } from '../../model/data/articlesTabs.data';
+import { RoutePath } from '@app/providers/AppRouter';
 import { ArticleType, ArticleView } from '@entities/Article';
 import { ArticleSortField } from '@widgets/ArticlesFilters';
 import type { SortOrder } from '@shared/types/globals.types';
@@ -40,6 +43,7 @@ const ArticlesFilters = memo((props: ArticlesFiltersProps) => {
 		handleChangeType,
 	} = props;
 	const { t: tFields } = useTranslation('fields');
+	const { t: tArticle } = useTranslation('article');
 	const { t: tArticles } = useTranslation('articles');
 
 	const tabs = useMemo(() => generateTabsData(tArticles), [tArticles]);
@@ -53,6 +57,9 @@ const ArticlesFilters = memo((props: ArticlesFiltersProps) => {
 					handleChangeSort={handleChangeSort}
 					handleChangeOrder={handleChangeOrder}
 				/>
+				<Button as={Link} to={RoutePath.article_create} theme={ButtonTheme.OUTLINE}>
+					{tArticle('create article')}
+				</Button>
 				<ViewSwitcher currentView={view} onChange={handleChangeView} />
 			</div>
 			<Input value={search} onChange={handleChangeSearch} placeholder={tFields('search')} />

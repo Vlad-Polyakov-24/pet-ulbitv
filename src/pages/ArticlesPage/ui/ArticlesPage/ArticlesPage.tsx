@@ -1,5 +1,6 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
+import { useSearchParams } from 'react-router';
 import { classNames } from '@shared/lib/classNames';
 import { DynamicModuleLoader, type ReducersList } from '@shared/lib/components/DynamicModuleLoader';
 import { useAppDispatch } from '@app/providers/StoreProvider';
@@ -12,7 +13,6 @@ import { fetchNextArticlesPage } from '../../model/services/fetchNextArticlesPag
 import { initArticlesPage } from '../../model/services/initArticlesPage/initArticlesPage';
 import { getArticlesPageIsLoading, getArticlesPageView } from '../../model/selectors/articlesPageSelectors';
 import cls from './ArticlesPage.module.scss';
-import { useSearchParams } from 'react-router';
 
 type ArticlesPageProps = {
 	className?: string;
@@ -23,6 +23,7 @@ const reducers: ReducersList = {
 };
 
 const ArticlesPage = ({ className }: ArticlesPageProps) => {
+	const scrollRef = useRef<HTMLDivElement>(null);
 	const [searchParams] = useSearchParams();
 	const dispatch = useAppDispatch();
 	const articles = useSelector(getArticles.selectAll);
@@ -39,10 +40,15 @@ const ArticlesPage = ({ className }: ArticlesPageProps) => {
 
 	return (
 		<DynamicModuleLoader reducers={reducers} removeAfterUnmount={false}>
-			<Section onScrollEnd={handleLoadNextPage} className={classNames(cls.articles, {}, [className])} restoreScroll>
+			<Section
+				className={classNames(cls.articles, {}, [className])}
+				wrapperRef={scrollRef}
+				onScrollEnd={handleLoadNextPage}
+				restoreScroll
+			>
 				<Container className={cls.articles__container} fluid>
 					<ArticlesPageFilter />
-					<ArticleList articles={articles} isLoading={isLoading} view={view} />
+					<ArticleList articles={articles} isLoading={isLoading} view={view} wrapperRef={scrollRef} />
 				</Container>
 			</Section>
 		</DynamicModuleLoader>

@@ -15,10 +15,10 @@ export const useInfiniteScroll = ({ callback, triggerRef, wrapperRef }: UseInfin
 		const options: IntersectionObserverInit = {
 			root: wrapperEl,
 			rootMargin: '0px',
-			threshold: 1.0,
+			threshold: 0,
 		};
 
-		if (!callback || !triggerEl) return;
+		if (!callback || !triggerEl || !wrapperEl) return;
 
 		observerRef.current?.disconnect();
 

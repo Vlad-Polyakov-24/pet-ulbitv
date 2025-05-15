@@ -39,7 +39,7 @@ const articlesPageSlice = createSlice({
 		setView: (state, action: PayloadAction<ArticleView>) => {
 			const view = action.payload;
 			state.view = view;
-			state.limit = view === ArticleView.GRID ? 9 : 4;
+			state.limit = view === ArticleView.GRID ? 12 : 4;
 			setStorage(localStorageKeys.ARTICLES_VIEW, view);
 		},
 		setPage: (state, action: PayloadAction<number>) => {
@@ -60,7 +60,7 @@ const articlesPageSlice = createSlice({
 		initState: (state) => {
 			const view = getStorage(localStorageKeys.ARTICLES_VIEW) as ArticleView || ArticleView.GRID;
 			state.view = view;
-			state.limit = view === ArticleView.GRID ? 9 : 4;
+			state.limit = view === ArticleView.GRID ? 12 : 4;
 			state._inited = true;
 		},
 	},

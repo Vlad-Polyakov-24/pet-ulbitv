@@ -53,11 +53,9 @@ const ArticleListItemSkeleton = memo(({ className, view }: ArticleListItemSkelet
 	};
 
 	return (
-		<li className={cls[view]}>
-			<Card className={classNames(cls.card, {}, [className])}>
-				{content[view]()}
-			</Card>
-		</li>
+		<Card className={classNames(cls.card, {}, [className, cls[view]])}>
+			{content[view]()}
+		</Card>
 	);
 });
 

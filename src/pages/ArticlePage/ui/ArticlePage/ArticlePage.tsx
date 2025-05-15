@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router';
+import { useParams } from 'react-router';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { classNames } from '@shared/lib/classNames';
@@ -8,10 +8,10 @@ import { DynamicModuleLoader, ReducersList } from '@shared/lib/components/Dynami
 import { Section } from '@widgets/Section';
 import { Container } from '@shared/ui/Container';
 import { Text, TextAlign, TextSize } from '@shared/ui/Text';
-import { Button, ButtonTheme } from '@shared/ui/Button';
 import { Article, ArticleList } from '@entities/Article';
 import { CommentList } from '@entities/Comment';
 import { AddCommentForm } from '@features/AddComment';
+import { ArticlePageHeader } from '../ArticlePageHeader/ArticlePageHeader';
 import { getArticleComments } from '../../model/slices/articleCommentsSlice';
 import { getArticleRecommendations } from '../../model/slices/articleRecommendationsSlice';
 import { articlePageReducer } from '../../model/slices/articlePageReducer';
@@ -20,7 +20,6 @@ import { getArticleRecommendationsIsLoading } from '../../model/selectors/articl
 import { fetchCommentsByArticleId } from '../../model/services/fetchCommentsByArticleId/fetchCommentsByArticleId';
 import { addCommentForArticle } from '../../model/services/addCommentForArticle/addCommentForArticle';
 import { fetchRecommendations } from '../../model/services/fetchRecommendations/fetchRecommendations';
-import { RoutePath } from '@app/providers/AppRouter';
 import cls from './ArticlePage.module.scss';
 
 type ArticlePageProps = {
@@ -35,7 +34,6 @@ const ArticlePage = ({ className }: ArticlePageProps) => {
 	const { t: tErrors } = useTranslation('errors');
 	const { t: tComments } = useTranslation('comments');
 	const { t: tArticle } = useTranslation('article');
-	const navigate = useNavigate();
 	const { id } = useParams<{ id: string }>();
 	const dispatch = useAppDispatch();
 	const comments = useSelector(getArticleComments.selectAll);
@@ -52,19 +50,13 @@ const ArticlePage = ({ className }: ArticlePageProps) => {
 		dispatch(addCommentForArticle(comment));
 	}, [dispatch]);
 
-	const handleBack = useCallback(() => {
-		navigate(RoutePath.articles);
-	}, [navigate]);
-
 	return (
 		<DynamicModuleLoader reducers={reducers}>
 			<Section className={classNames(cls.article, {}, [className])} restoreScroll>
 				<Container className={cls.article__container} fluid>
 					{id ? (
 						<>
-							<Button theme={ButtonTheme.OUTLINE} onClick={handleBack} style={{ alignSelf: 'flex-start' }}>
-								{tArticle('back to list')}
-							</Button>
+							<ArticlePageHeader id={id} />
 							<Article id={id} />
 							<Text title={tArticle('recommendations')} size={TextSize.XL} />
 							<ArticleList articles={recommendations} isLoading={recommendationsIsLoading} />
