@@ -26,7 +26,12 @@ const ArticleList = memo(({ view = ArticleView.GRID, ...rest }: ArticleListProps
 		<>
 			{listMap[view]()}
 			{(!rest.isLoading && rest.articles.length === 0) && (
-				<Text title={tArticles('articles not found')} align={TextAlign.CENTER} size={TextSize.L} />
+				<Text
+					title={tArticles('articles not found')}
+					titleTag={'h3'}
+					align={TextAlign.CENTER}
+					size={TextSize.L}
+				/>
 			)}
 		</>
 	);

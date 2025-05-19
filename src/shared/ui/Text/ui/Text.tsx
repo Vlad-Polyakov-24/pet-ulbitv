@@ -4,6 +4,7 @@ import { VStack } from '@shared/ui/Stack';
 import { getColorClass, TextColorProps } from '../lib/getColorClass';
 import { getSizeClass, TextSizeProps } from '../lib/getSizeClass';
 import { getAlignClass, TextAlignProps } from '../lib/getAlignClass';
+import type { TextTitleTag } from '../model/types/Text.types';
 import cls from './Text.module.scss';
 
 type TextProps = {
@@ -16,10 +17,11 @@ type TextProps = {
 	color?: TextColorProps;
 	size?: TextSizeProps;
 	align?: TextAlignProps;
+	titleTag?: TextTitleTag;
 };
 
 const Text = memo((props: TextProps) => {
-	const { className, titleClassName, textClassName, styles, title, text, color, size, align } = props;
+	const { className, titleClassName, textClassName, styles, title, text, color, size, align, titleTag } = props;
 	const titleAdditional: Additional = [
 		cls[getColorClass('title', color)],
 		cls[getSizeClass('title', size)],
@@ -32,12 +34,13 @@ const Text = memo((props: TextProps) => {
 		cls[getAlignClass('text', align)],
 		textClassName,
 	];
+	const TitleTag = titleTag ?? 'h2';
 
 	if (!title && !text) return null;
 
 	return (
 		<VStack gap={'6'} className={className} style={styles}>
-			{title && <p className={classNames('', {}, titleAdditional)}>{title}</p>}
+			{title && <TitleTag className={classNames('', {}, titleAdditional)}>{title}</TitleTag>}
 			{text && <p className={classNames('', {}, textAdditional)}>{text}</p>}
 		</VStack>
 	);

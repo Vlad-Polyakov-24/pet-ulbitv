@@ -21,3 +21,5 @@ export enum TextAlign {
 	CENTER = 'align-center',
 	RIGHT = 'align-right',
 }
+
+export type TextTitleTag = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';

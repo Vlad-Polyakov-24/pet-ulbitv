@@ -1,4 +1,5 @@
 import { useMemo, type ChangeEvent, type SelectHTMLAttributes } from 'react';
+import { Field, Label, Select as HSelect } from '@headlessui/react'
 import { classNames, type Mods } from '@shared/lib/classNames';
 import { ErrorMessage } from '@shared/ui/ErrorMessage';
 import type { ISelectOptions } from '../model/types/Select.types';
@@ -28,17 +29,17 @@ const Select = <T extends string>(props: SelectProps<T>) => {
 	)), [options]);
 
 	return (
-		<label className={classNames(cls.field, mods, [className, cls[orientation]])}>
-			{label && <span className={cls.field__label}>{label}</span>}
-			<select
+		<Field className={classNames(cls.field, mods, [className, cls[orientation]])}>
+			{label && <Label className={cls.field__label}>{label}</Label>}
+			<HSelect
 				className={cls.field__select}
 				onChange={handleOnChange}
 				{...rest}
 			>
 				{...optionsList}
-			</select>
+			</HSelect>
 			{error && <ErrorMessage className={cls.field__error} message={error} />}
-		</label>
+		</Field>
 	);
 };
 

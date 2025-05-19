@@ -58,14 +58,14 @@ const ArticlePage = ({ className }: ArticlePageProps) => {
 						<>
 							<ArticlePageHeader id={id} />
 							<Article id={id} />
-							<Text title={tArticle('recommendations')} size={TextSize.XL} />
+							<Text title={tArticle('recommendations')} titleTag={'h2'} size={TextSize.XL} />
 							<ArticleList articles={recommendations} isLoading={recommendationsIsLoading} virtualized={false} />
-							<Text title={tComments('comments')} size={TextSize.XL} />
+							<Text title={tComments('comments')} titleTag={'h2'} size={TextSize.XL} />
 							<AddCommentForm handleSendComment={handleSendComment} />
 							<CommentList isLoading={commentsIsLoading} comments={comments} />
 						</>
 					) : (
-						<Text align={TextAlign.CENTER} text={tErrors('article not found')} />
+						<Text align={TextAlign.CENTER} text={tErrors('article not found')} titleTag={'h3'} />
 					)}
 				</Container>
 			</Section>

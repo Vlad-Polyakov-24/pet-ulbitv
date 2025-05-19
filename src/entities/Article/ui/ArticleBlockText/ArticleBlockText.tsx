@@ -8,15 +8,11 @@ type ArticleBlockTextProps = {
 	block: IArticleBlockText;
 };
 
-const ArticleBlockText = memo(({ className, block }: ArticleBlockTextProps) => {
-	const { title, paragraphs } = block;
-
-	return (
-		<VStack gap={'14'} className={className}>
-			{title && <Text title={title} />}
-			{paragraphs.map((p, i) => <Text key={i} text={p} />)}
-		</VStack>
-	);
-});
+const ArticleBlockText = memo(({ className, block: { title, paragraphs } }: ArticleBlockTextProps) => (
+	<VStack gap={'14'} className={className}>
+		{title && <Text titleTag={'h3'} title={title} />}
+		{paragraphs.map((p, i) => <Text key={i} text={p} />)}
+	</VStack>
+));
 
 export { ArticleBlockText };

@@ -33,7 +33,7 @@ const ProfilePageHeader = memo((props: ProfilePageHeaderProps) => {
 
 	return (
 		<HStack justify={'between'} align={'center'} gap={'20'} className={className}>
-			<Text title={tProfile('profile')} />
+			<Text title={tProfile('profile')} titleTag={'h1'} />
 			<HStack align={'center'} gap={'10'}>
 				{canEdit && (
 					<>

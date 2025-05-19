@@ -22,7 +22,7 @@ const CommentList = memo((props: CommentListProps) => {
 					{comments?.map((c) => <CommentItem key={c.id} isLoading={isLoading} comment={c} />)}
 				</VStack>
 			) : (
-				<Text title={t('comments not found')} />
+				<Text title={t('comments not found')} titleTag={'h3'} />
 			)}
 		</div>
 	);

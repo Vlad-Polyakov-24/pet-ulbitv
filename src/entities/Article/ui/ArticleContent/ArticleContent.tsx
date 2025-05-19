@@ -34,7 +34,7 @@ const ArticleContent = memo(({ className, article }: ArticleContentProps) => {
 	return (
 		<VStack gap={'20'} className={className}>
 			<Avatar size={200} src={img} alt={title} className={'m-centred'} />
-			<Text size={{ text: TextSize.L, title: TextSize.XL }} title={title} text={subtitle} />
+			<Text size={{ text: TextSize.L, title: TextSize.XL }} titleTag={'h1'} title={title} text={subtitle} />
 			<HStack gap={'20'} align={'center'}>
 				<HStack gap={'6'} align={'center'}>
 					<Icon icon={<EyeIcon />} />
